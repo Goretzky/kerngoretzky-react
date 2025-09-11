@@ -1,25 +1,29 @@
+// Projects.tsx
 import React from "react";
 
-const projectList = [
-  { title: "Portfolio Website", description: "This portfolio website built with React & Tailwind CSS.", link: "#" },
-  { title: "SwiftUI Quiz App", description: "A multiplication quiz app with customizable settings.", link: "#" },
-  { title: "Moonshot Project", description: "iOS app project from 100 Days of SwiftUI.", link: "#" },
+const projects = [
+  { title: "Project One", description: "A brief description of Project One." },
+  { title: "Project Two", description: "A brief description of Project Two." },
+  { title: "Project Three", description: "A brief description of Project Three." },
 ];
 
-const Projects = () => {
+const Projects: React.FC = () => {
   return (
-    <section id="projects" className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white p-8">
-      <h2 className="text-4xl font-bold mb-12 text-center">Projects</h2>
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {projectList.map((project, i) => (
-          <a
-            key={i}
-            href={project.link}
-            className="bg-gray-700 rounded-xl p-6 hover:bg-gradient-to-r from-purple-600 to-pink-500 transform hover:scale-105 transition duration-300 shadow-lg"
+    <section className="projects py-16 px-4 bg-gray-800 text-gray-100">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white drop-shadow-md">
+        Projects
+      </h2>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition duration-300"
           >
-            <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-            <p>{project.description}</p>
-          </a>
+            <h3 className="text-2xl font-semibold mb-2 text-white">
+              {project.title}
+            </h3>
+            <p className="text-gray-200">{project.description}</p>
+          </div>
         ))}
       </div>
     </section>
