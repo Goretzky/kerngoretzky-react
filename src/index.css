@@ -30,67 +30,33 @@ a:hover {
 }
 
 section {
-  padding: 4rem 2rem;
   position: relative;
+  padding: 4rem 2rem;
 }
 
-
-/* Hero background */
-.bg-hero {
-  @apply bg-cover bg-center w-full h-screen;
-  /* Default fallback */
-  background-image: url('/images/hero-480.webp'), url('/images/hero-480.jpg');
+/* Remove padding for hero section specifically */
+#hero {
+  padding: 0;
+  margin: 0;
 }
 
-/* Small mobile */
-@media (min-width: 480px) {
-  .bg-hero {
-    background-image: url('/images/hero-768.webp'), url('/images/hero-768.jpg');
-  }
-}
-
-/* Tablet */
-@media (min-width: 768px) {
-  .bg-hero {
-    background-image: url('/images/hero-1024.webp'), url('/images/hero-1024.jpg');
-  }
-}
-
-/* Medium desktop */
-@media (min-width: 1024px) {
-  .bg-hero {
-    background-image: url('/images/hero-1440.webp'), url('/images/hero-1440.jpg');
-  }
-}
-
-/* Large desktop */
-@media (min-width: 1440px) {
-  .bg-hero {
-    background-image: url('/images/hero-1920.webp'), url('/images/hero-1920.jpg');
-  }
+/* Hero section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 .hero {
-  position: relative; /* make sure overlay is inside this stacking context */
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.5)
-  );
-  pointer-events: none;
-  z-index: 9; /* overlay */
+  position: relative;
 }
 
 .hero-title,
 .hero-subtitle {
   position: relative;
-  z-index: 20; /* text above overlay */
+  z-index: 10; /* below the fade overlay */
   color: #ffffff;
 }
 
@@ -200,7 +166,7 @@ footer {
 .hero-title,
 .hero-subtitle {
   position: relative;
-  z-index: 50;
+  z-index: 10;
   color: #ffffff; /* force bright white */
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
 }
