@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Dark background with cyan border -->
+  <rect x="4" y="4" width="120" height="120" fill="#111827" rx="12"
+        stroke="#32C4C4" stroke-width="4"/>
+
+  <!-- Subtle inner glow -->
+  <rect x="12" y="12" width="104" height="104" rx="10"
+        fill="rgba(50, 196, 196, 0.1)"/>
+
+  <!-- KG text using Big Shoulders style -->
+  <text x="64" y="88"
+        font-family="'Big Shoulders', sans-serif"
+        font-size="72"
+        font-weight="700"
+        fill="#32C4C4"
+        text-anchor="middle"
+        letter-spacing="-3">KG</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background with cyan border -->
+  <rect x="1" y="1" width="30" height="30" fill="#111827" rx="3"
+        stroke="#32C4C4" stroke-width="2"/>
+
+  <!-- KG text - using text element for consistent sizing -->
+  <text x="16" y="22"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="18"
+        font-weight="700"
+        fill="#32C4C4"
+        text-anchor="middle"
+        letter-spacing="1">KG</text>
+</svg>

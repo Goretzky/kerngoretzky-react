@@ -78,9 +78,13 @@ const About: React.FC = () => {
                 With a background in broadcasting, media, and technology, I bring a unique perspective to building
                 engaging, user-friendly websites and applications.
               </p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed mb-4">
                 I'm passionate about creating modern web experiences that combine clean design with powerful functionality.
                 When I'm not coding, I'm exploring new ways technology can shape storytelling, creativity, and business.
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                I actively leverage AI-powered development tools including Claude Code and GitHub Copilot, using prompt engineering
+                techniques to accelerate development workflows and maintain code quality.
               </p>
             </div>
 
@@ -91,7 +95,7 @@ const About: React.FC = () => {
                 <div>
                   <h4 className="text-sm font-medium text-[#32C4C4] mb-2">Frontend</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["React", "Angular", "TypeScript", "JavaScript", "HTML5", "CSS", "Tailwind", "Bootstrap"].map((skill, index) => (
+                    {["React", "Next.js", "Angular", "TypeScript", "JavaScript", "HTML5", "CSS", "Tailwind", "Bootstrap"].map((skill, index) => (
                       <span
                         key={index}
                         className="px-3 py-1 text-xs font-medium rounded-full"
