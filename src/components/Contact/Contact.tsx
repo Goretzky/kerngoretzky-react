@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
               placeholder="Your Name"
               className={
                 "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
-                (errors.name ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+                (errors.name ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
             />
             {errors.name && (
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
               placeholder="Your Email"
               className={
                 "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
-                (errors.email ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+                (errors.email ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
             />
             {errors.email && (
@@ -196,7 +196,7 @@ const Contact: React.FC = () => {
               placeholder="Your Message"
               className={
                 "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
-                (errors.message ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+                (errors.message ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
               rows={5}
             />
