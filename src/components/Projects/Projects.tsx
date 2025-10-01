@@ -26,9 +26,30 @@ const STAGGER_DELAY = 0.1;     // Time between each card's animation start (seco
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom easing curve for smooth motion
 
 const projects = [
-  { title: "Project One", description: "A brief description of Project One." },
-  { title: "Project Two", description: "A brief description of Project Two." },
-  { title: "Project Three", description: "A brief description of Project Three." },
+  {
+    title: "KernGoretzky.ca",
+    description: "React-based blog website using Next.js framework with markdown articles. A modern single-page application showcasing technical writing and web development expertise.",
+    technologies: ["React", "Next.js", "Vercel", "Markdown"],
+    demoUrl: "https://www.kerngoretzky.ca/",
+    githubUrl: "#", // TODO: Add GitHub repository URL
+    image: "/images/project-kerngoretzky-ca.jpg" // TODO: Add project screenshot
+  },
+  {
+    title: "CoderLeaf",
+    description: "Prerendered Angular website with glassmorphism design, search engine optimized. Full AWS cloud infrastructure with contact microservice and custom email integration.",
+    technologies: ["Angular", "AWS S3", "CloudFront", "Lambda", "API Gateway", "Bootstrap"],
+    demoUrl: "http://coderleaf.com/",
+    githubUrl: "#", // TODO: Add GitHub repository URL
+    image: "/images/project-coderleaf.jpg" // TODO: Add project screenshot
+  },
+  {
+    title: "Portfolio Website",
+    description: "Modern React portfolio website featuring liquid glass morphism design, smooth animations, and responsive layout. Built with TypeScript and Framer Motion.",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Claude Code"],
+    demoUrl: "#", // Current site
+    githubUrl: "https://github.com/Goretzky/kerngoretzky-react",
+    image: "/images/project-portfolio.jpg" // TODO: Add project screenshot
+  },
 ];
 
 const Projects: React.FC = () => {
@@ -82,10 +103,82 @@ const Projects: React.FC = () => {
               className="glass-card p-6 rounded-xl"
             >
               <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
-              <h3 className="text-2xl font-semibold mb-2 text-white relative z-10">
+
+              {/* Project Image Placeholder */}
+              <div className="relative z-10 mb-4 rounded-lg overflow-hidden bg-gray-800 h-48 flex items-center justify-center">
+                <span className="text-gray-500 text-sm">Project Screenshot</span>
+              </div>
+
+              <h3 className="text-2xl font-semibold mb-3 text-white relative z-10">
                 {project.title}
               </h3>
-              <p className="text-gray-200 relative z-10">{project.description}</p>
+
+              <p className="text-gray-200 mb-4 relative z-10 text-sm leading-relaxed">
+                {project.description}
+              </p>
+
+              {/* Tech Stack Tags */}
+              <div className="flex flex-wrap gap-2 mb-4 relative z-10">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="px-3 py-1 text-xs font-medium rounded-full"
+                    style={{
+                      background: 'rgba(50, 196, 196, 0.2)',
+                      border: '1px solid rgba(50, 196, 196, 0.4)',
+                      color: '#32C4C4'
+                    }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3 relative z-10">
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    color: '#ffffff'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                >
+                  View Demo
+                </a>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    color: '#ffffff'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                >
+                  GitHub
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>

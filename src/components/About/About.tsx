@@ -51,7 +51,7 @@ const About: React.FC = () => {
           </h2>
         </motion.div>
 
-        {/* Content Card - Using same width as a single project card */}
+        {/* Content Card - Expanded with skills and education */}
         <motion.div
           initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
           whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
@@ -67,23 +67,108 @@ const About: React.FC = () => {
             position: 'relative',
             overflow: 'hidden'
           }}
-          className="glass-card p-8 rounded-xl max-w-md mx-auto"
+          className="glass-card p-8 rounded-xl max-w-4xl mx-auto"
         >
           <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
-          <div className="space-y-6 relative z-10">
-            <p className="text-gray-200 leading-relaxed">
-              Hi, I'm Kern Goretzky — a developer with<br /> 
-              a background in broadcasting, media, and<br />
-              technology. I enjoy building engaging,<br /> 
-              user-friendly websites and apps that <br />
-              bring ideas to life.
-            </p>
+          <div className="space-y-8 relative z-10">
+            {/* Bio */}
+            <div>
+              <p className="text-gray-200 leading-relaxed mb-4">
+                Hi, I'm Kern Goretzky — a full-stack web developer specializing in React, Angular, and Node.js.
+                With a background in broadcasting, media, and technology, I bring a unique perspective to building
+                engaging, user-friendly websites and applications.
+              </p>
+              <p className="text-gray-300 leading-relaxed">
+                I'm passionate about creating modern web experiences that combine clean design with powerful functionality.
+                When I'm not coding, I'm exploring new ways technology can shape storytelling, creativity, and business.
+              </p>
+            </div>
 
-            <p className="text-gray-300 leading-relaxed">
-              When I'm not coding, I'm spending time<br /> 
-              exploring new ways technology can shape<br /> 
-              storytelling, creativity, and business.
-            </p>
+            {/* Skills Section */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-white">Technical Skills</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h4 className="text-sm font-medium text-[#32C4C4] mb-2">Frontend</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["React", "Angular", "TypeScript", "JavaScript", "HTML5", "CSS", "Tailwind", "Bootstrap"].map((skill, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 text-xs font-medium rounded-full"
+                        style={{
+                          background: 'rgba(50, 196, 196, 0.2)',
+                          border: '1px solid rgba(50, 196, 196, 0.4)',
+                          color: '#32C4C4'
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-[#32C4C4] mb-2">Backend & Cloud</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["Node.js", "Express", "MongoDB", "AWS", "Vercel", "Git/GitHub"].map((skill, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 text-xs font-medium rounded-full"
+                        style={{
+                          background: 'rgba(50, 196, 196, 0.2)',
+                          border: '1px solid rgba(50, 196, 196, 0.4)',
+                          color: '#32C4C4'
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Education Section */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 text-white">Education</h3>
+              <div className="space-y-3">
+                <div>
+                  <h4 className="text-md font-medium text-gray-200">MBA in Finance</h4>
+                  <p className="text-sm text-gray-400">Heriot-Watt University</p>
+                </div>
+                <div>
+                  <h4 className="text-md font-medium text-gray-200">Radio & Television Arts</h4>
+                  <p className="text-sm text-gray-400">Toronto Metropolitan University</p>
+                </div>
+                <div>
+                  <h4 className="text-md font-medium text-gray-200">English Major</h4>
+                  <p className="text-sm text-gray-400">University of Alberta</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Download Resume Button */}
+            <div className="pt-4">
+              <a
+                href="#" // TODO: Add resume PDF link
+                download
+                className="inline-block px-6 py-3 font-semibold rounded-full transition-all duration-300"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#ffffff'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                }}
+              >
+                Download Resume →
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

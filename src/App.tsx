@@ -4,6 +4,7 @@ import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -11,14 +12,15 @@ const App = () => {
       <Hero /> {/* full width hero */}
       <div id="root">
         <Header />
-        <main className="pt-24">
+        <main>
           <About />
           <Projects />
           <Contact />
         </main>
+        <Footer />
       </div>
   </div>
-  
+
   );
 };
 
