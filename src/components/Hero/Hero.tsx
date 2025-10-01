@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
       // *** INITIAL OPACITY CONTROL ***
       // This is where you control the initial and final opacity
       const initialOpacity = 0.25;   // Start at 25% opacity
-      const maxOpacity = 0.92;      // Max out at 92% opacity on full scroll
+      const maxOpacity = 0.75;      // Max out at 92% opacity on full scroll
       
       // Start with initial opacity and increase based on scroll
       const scrollFactor = Math.min(Math.max(scrolled / fadeDistance, 0), 1);

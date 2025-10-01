@@ -1,0 +1,153 @@
+// Contact.tsx
+import React, { useState } from "react";
+import { useForm } from "@formspree/react";
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+const Contact: React.FC = () => {
+  // Replace with your actual Formspree form ID after signing up at formspree.io
+  const [formState, handleSubmit] = useForm("xkgqovrk");
+
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      await handleSubmit({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      });
+    }
+  };
+
+  if (formState.succeeded) {
+    return (
+      <section className="contact py-16 px-4 bg-gray-900 text-gray-100">
+        <div className="max-w-xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
+            Thank You!
+          </h2>
+          <p className="text-gray-300 mb-8">
+            Your message has been sent successfully. I'll get back to you soon.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="contact py-16 px-4 bg-gray-900 text-gray-100">
+      <div className="max-w-xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
+          Contact Me
+        </h2>
+        <p className="text-gray-300 mb-8">
+          Feel free to reach out to discuss projects or collaborations.
+        </p>
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              className={
+                "p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 " +
+                (errors.name ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+            />
+            {errors.name && (
+              <span className="text-red-400 text-sm text-left">{errors.name}</span>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your Email"
+              className={
+                "p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 " +
+                (errors.email ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+            />
+            {errors.email && (
+              <span className="text-red-400 text-sm text-left">{errors.email}</span>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Your Message"
+              className={
+                "p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 " +
+                (errors.message ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+              rows={5}
+            />
+            {errors.message && (
+              <span className="text-red-400 text-sm text-left">{errors.message}</span>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={formState.submitting}
+            className={
+              "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300 " +
+              (formState.submitting ? "opacity-75 cursor-not-allowed" : "")
+            }
+          >
+            {formState.submitting ? "Sending..." : "Send Message"}
+          </button>
+        </form>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
