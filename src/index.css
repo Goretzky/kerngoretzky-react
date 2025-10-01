@@ -22,15 +22,6 @@ a {
   text-decoration: none;
 }
 
-/* Only apply link color to regular text links, not styled buttons */
-a:not(.glass-button):not([class*="btn"]):not([class*="button"]) {
-  color: #60a5fa; /* nice blue for links */
-}
-
-a:not(.glass-button):not([class*="btn"]):not([class*="button"]):hover {
-  text-decoration: underline;
-}
-
 /* Fallback for browsers without backdrop-filter support */
 @supports not (backdrop-filter: blur(10px)) {
   .glass-button,

@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
           style={{ transformStyle: "preserve-3d" }}
           className="text-center mb-12 px-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
+          <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
             Contact Me
           </h2>
           <p className="text-gray-200 leading-relaxed">

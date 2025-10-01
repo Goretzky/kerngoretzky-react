@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
           {/* Social Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Connect</h4>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 justify-center md:justify-start">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
