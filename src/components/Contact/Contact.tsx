@@ -112,7 +112,18 @@ const Contact: React.FC = () => {
   }
 
   return (
-    <section id="contact" className="contact py-20 px-4 text-gray-100">
+    <section
+      id="contact"
+      className="contact py-20 px-4 text-gray-100"
+      style={{
+        position: 'relative',
+        background: 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(5px)',
+        WebkitBackdropFilter: 'blur(5px)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
+      }}
+    >
       <div className="max-w-2xl mx-auto" style={{ perspective: "2000px" }}>
         {/* Header */}
         <motion.div
@@ -211,11 +222,34 @@ const Contact: React.FC = () => {
             whileHover={!formState.submitting ? { scale: 1.05 } : {}}
             whileTap={!formState.submitting ? { scale: 0.98 } : {}}
             className={
-              "bg-white text-black font-semibold py-3 px-8 rounded-full transition duration-300 w-full max-w-[200px] hover:bg-gray-200 " +
+              "glass-button relative overflow-hidden text-white font-semibold py-3 px-8 rounded-full w-full max-w-[200px] " +
               (formState.submitting ? "opacity-75 cursor-not-allowed" : "")
             }
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              if (!formState.submitting) {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!formState.submitting) {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+              }
+            }}
           >
-            {formState.submitting ? "Sending..." : "Send Message"}
+            <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+            <span className="relative z-10">
+              {formState.submitting ? "Sending..." : "Send Message"}
+            </span>
           </motion.button>
         </form>
         </motion.div>
