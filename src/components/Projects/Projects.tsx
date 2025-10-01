@@ -42,8 +42,7 @@ const Projects: React.FC = () => {
             transition={{ duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "-100px" }}
             style={{
-              transformStyle: "preserve-3d",
-              transformOrigin: "left center"
+              transformStyle: "preserve-3d"
             }}
             className="col-span-full mb-12"
           >
