@@ -137,10 +137,20 @@ const Contact: React.FC = () => {
           whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
           transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "-100px" }}
-          style={{ transformStyle: "preserve-3d" }}
-          className="bg-gray-700 p-8 rounded-xl shadow-lg max-w-xl mx-auto"
+          style={{
+            transformStyle: "preserve-3d",
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
+          className="glass-card p-8 rounded-xl max-w-xl mx-auto"
         >
-          <form id="contact-form" onSubmit={onSubmit} className="flex flex-col gap-6 items-center">
+          <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          <form id="contact-form" onSubmit={onSubmit} className="flex flex-col gap-6 items-center relative z-10">
           {/* Name Input - max-w-md (448px) width, 0.75rem (gap-3) error spacing */}
           <div className="flex flex-col gap-3 w-full max-w-md">
             <input

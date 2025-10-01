@@ -46,10 +46,20 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
           transition={{ duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "-100px" }}
-          style={{ transformStyle: "preserve-3d" }}
-          className="bg-gray-700 p-8 rounded-xl shadow-lg max-w-md mx-auto"
+          style={{
+            transformStyle: "preserve-3d",
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
+          className="glass-card p-8 rounded-xl max-w-md mx-auto"
         >
-          <div className="space-y-6">
+          <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          <div className="space-y-6 relative z-10">
             <p className="text-gray-200 leading-relaxed">
               Hi, I'm Kern Goretzky — a developer with<br /> 
               a background in broadcasting, media, and<br />

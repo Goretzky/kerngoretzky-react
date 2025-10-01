@@ -69,13 +69,23 @@ const Projects: React.FC = () => {
               // Viewport settings: trigger when in view, only animate once
               viewport={{ once: true, margin: "-100px" }}
               // Enable 3D transforms
-              style={{ transformStyle: "preserve-3d" }}
-              className="bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-2xl"
+              style={{
+                transformStyle: "preserve-3d",
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              className="glass-card p-6 rounded-xl"
             >
-              <h3 className="text-2xl font-semibold mb-2 text-white">
+              <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+              <h3 className="text-2xl font-semibold mb-2 text-white relative z-10">
                 {project.title}
               </h3>
-              <p className="text-gray-200">{project.description}</p>
+              <p className="text-gray-200 relative z-10">{project.description}</p>
             </motion.div>
           ))}
         </div>
