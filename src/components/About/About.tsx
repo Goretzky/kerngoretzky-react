@@ -35,7 +35,7 @@ const About: React.FC = () => {
           style={{ transformStyle: "preserve-3d" }}
           className="mb-12 px-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md">
+          <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
             About Me
           </h2>
         </motion.div>

@@ -47,7 +47,7 @@ const Projects: React.FC = () => {
             }}
             className="col-span-full mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md">
+            <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
               Projects
             </h2>
           </motion.div>
