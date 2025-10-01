@@ -46,9 +46,9 @@ const projects = [
     title: "Portfolio Website",
     description: "Modern React portfolio website featuring liquid glass morphism design, smooth animations, and responsive layout. Built with TypeScript and Framer Motion.",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Claude Code"],
-    demoUrl: "#", // Current site
+    demoUrl: "https://kerngoretzky.com",
     githubUrl: "https://github.com/Goretzky/kerngoretzky-react",
-    image: "/images/project-portfolio.jpg" // TODO: Add project screenshot
+    image: "/images/project-portfolio.jpg"
   },
 ];
 
@@ -73,8 +73,11 @@ const Projects: React.FC = () => {
           </motion.div>
           {/* Project Cards */}
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
               key={index}
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               // Initial state: invisible, shifted right, and rotated
               initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
               // Final state: visible, centered, and flat
@@ -98,16 +101,41 @@ const Projects: React.FC = () => {
                 backdropFilter: 'blur(10px)',
                 WebkitBackdropFilter: 'blur(10px)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                cursor: 'pointer'
               }}
-              className="glass-card p-6 rounded-xl"
+              className="glass-card p-6 rounded-xl block no-underline"
             >
               <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
 
-              {/* Project Image Placeholder */}
-              <div className="relative z-10 mb-4 rounded-lg overflow-hidden bg-gray-800 h-48 flex items-center justify-center">
-                <span className="text-gray-500 text-sm">Project Screenshot</span>
-              </div>
+              {/* Project Image */}
+              {project.image && (
+                <div className="relative z-10 mb-4 rounded-lg overflow-hidden bg-gray-800 h-48">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={`
+                        ${project.image.replace('.jpg', '-480.webp')} 480w,
+                        ${project.image.replace('.jpg', '-768.webp')} 768w,
+                        ${project.image.replace('.jpg', '-1024.webp')} 1024w
+                      `}
+                      sizes="(max-width: 768px) 480px, (max-width: 1024px) 768px, 1024px"
+                    />
+                    <img
+                      src={project.image}
+                      srcSet={`
+                        ${project.image.replace('.jpg', '-480.jpg')} 480w,
+                        ${project.image.replace('.jpg', '-768.jpg')} 768w,
+                        ${project.image.replace('.jpg', '-1024.jpg')} 1024w
+                      `}
+                      sizes="(max-width: 768px) 480px, (max-width: 1024px) 768px, 1024px"
+                      alt={`${project.title} screenshot`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </picture>
+                </div>
+              )}
 
               <h3 className="text-2xl font-semibold mb-3 text-white relative z-10">
                 {project.title}
@@ -179,7 +207,7 @@ const Projects: React.FC = () => {
                   GitHub
                 </a>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
