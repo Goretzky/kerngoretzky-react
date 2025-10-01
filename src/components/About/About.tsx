@@ -24,7 +24,7 @@ const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motio
 
 const About: React.FC = () => {
   return (
-    <section className="about py-16 px-4 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <section id="about" className="about py-16 px-4">
       <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
         {/* Header */}
         <motion.div

@@ -33,7 +33,7 @@ const projects = [
 
 const Projects: React.FC = () => {
   return (
-    <section className="projects py-16 px-4 bg-gray-800 text-gray-100">
+    <section id="projects" className="projects py-16 px-4 text-gray-100">
       <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div

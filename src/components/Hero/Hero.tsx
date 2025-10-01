@@ -122,15 +122,6 @@ const Hero: React.FC = () => {
         />
       </div>
 
-      {/* Debug overlay - uncomment to see scroll progress
-      <div 
-        className="fixed top-4 right-4 bg-black text-white p-2 rounded shadow-lg"
-        style={{ zIndex: 9999 }}
-      >
-        Scroll: {Math.round(scrollProgress * 100)}%
-      </div>
-      */}
-
       {/* Hero content - always on top */}
       <motion.div
         className="relative text-center px-6"
@@ -152,25 +143,119 @@ const Hero: React.FC = () => {
           Building sleek, modern websites & immersive digital experiences.
         </motion.p>
 
-        <motion.div
-          className="mt-10 flex justify-center gap-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.0, delay: 0.45 }}
-        >
-          <a
+        <div className="mt-10 flex justify-center gap-6">
+          <motion.a
+            href="#about"
+            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            initial={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)'
+            }}
+            animate={{
+              opacity: 1,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)'
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
+              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+            }}
+            whileHover={{ scale: 1.05 }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+            }}
+          >
+            <span className="relative z-10">About Me</span>
+            <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          </motion.a>
+          <motion.a
             href="#projects"
-            className="px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-gray-200 transition"
+            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            initial={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)'
+            }}
+            animate={{
+              opacity: 1,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)'
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
+              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+            }}
+            whileHover={{ scale: 1.05 }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+            }}
           >
-            View Projects
-          </a>
-          <a
+            <span className="relative z-10">View Projects</span>
+            <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          </motion.a>
+          <motion.a
             href="#contact"
-            className="px-8 py-4 text-lg font-semibold border-2 border-white rounded-full hover:bg-white/10 transition"
+            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            initial={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)'
+            }}
+            animate={{
+              opacity: 1,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)'
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
+              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+            }}
+            whileHover={{ scale: 1.05 }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+            }}
           >
-            Get in Touch
-          </a>
-        </motion.div>
+            <span className="relative z-10">Get in Touch</span>
+            <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          </motion.a>
+        </div>
       </motion.div>
     </section>
   );

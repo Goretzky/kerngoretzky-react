@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html, body {
   margin: 0;
@@ -21,12 +19,28 @@ html, body {
 }
 
 a {
-  color: #60a5fa; /* nice blue for links */
   text-decoration: none;
 }
 
-a:hover {
+/* Only apply link color to regular text links, not styled buttons */
+a:not(.glass-button):not([class*="btn"]):not([class*="button"]) {
+  color: #60a5fa; /* nice blue for links */
+}
+
+a:not(.glass-button):not([class*="btn"]):not([class*="button"]):hover {
   text-decoration: underline;
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-button {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  }
+
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.35) !important;
+  }
 }
 
 section {
@@ -129,37 +143,6 @@ section {
   color: #d1d5db;
 }
 
-.contact-container {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.contact-container input,
-.contact-container textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  border: none;
-  background-color: #374151;
-  color: #f9fafb;
-}
-
-.contact-container button {
-  padding: 0.75rem 2rem;
-  background-color: #60a5fa;
-  border: none;
-  border-radius: 8px;
-  color: #111827;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.contact-container button:hover {
-  background-color: #3b82f6;
-}
 
 
 footer {

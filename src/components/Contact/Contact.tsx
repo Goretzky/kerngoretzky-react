@@ -1,39 +1,214 @@
 // Contact.tsx
-import React from "react";
+/**
+ * Contact form component with Formspree integration
+ * Features:
+ * - Form validation (required fields and email format)
+ * - Real-time error handling and feedback
+ * - Loading states during submission
+ * - Success message after successful submission
+ * - Responsive layout with controlled input widths
+ * 
+ * Layout customization:
+ * - Name and email inputs: Use max-w-{size} classes below to adjust width
+ *   Available sizes: max-w-xs (320px), max-w-sm (384px), max-w-md (448px), max-w-lg (512px)
+ * - Message area: Takes full width of container
+ * - Submit button: Fixed width with max-w-[200px]
+ */
+
+import React, { useState } from "react";
+import { useForm } from "@formspree/react";
+import { motion } from "framer-motion";
+
+// TypeScript interface for form field types
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+// Animation Parameters - matches About and Projects sections
+const ROTATION_ANGLE = 90;
+const SLIDE_DISTANCE = 100;
+const ANIMATION_DURATION = 1.8;
+const EASE = [0.11, 0, 0.5, 0] as const;
 
 const Contact: React.FC = () => {
+  // Replace with your actual Formspree form ID after signing up at formspree.io
+  // Initialize Formspree hook with your form ID
+  const [formState, handleSubmit] = useForm("xanpeaqb");
+
+  // State for form field values
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  // State for validation errors (partial because not all fields may have errors)
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+
+  // Validate all form fields and return true if valid, false if there are errors
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormData> = {};
+    // Check for empty name field
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    // Check for empty email and valid email format
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    // Check for empty message
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
+  // Handle changes in form inputs and clear any existing errors
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    // Update form data
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing in a field that had an error
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      await handleSubmit({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      });
+    }
+  };
+
+  if (formState.succeeded) {
+    return (
+      <section id="contact" className="contact py-16 px-4 text-gray-100">
+        <motion.div
+          className="max-w-xl mx-auto text-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
+            Thank You!
+          </h2>
+          <p className="text-gray-300 mb-8">
+            Your message has been sent successfully. I'll get back to you soon.
+          </p>
+        </motion.div>
+      </section>
+    );
+  }
+
   return (
-    <section className="contact py-16 px-4 bg-gray-900 text-gray-100">
-      <div className="max-w-xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
-          Contact Me
-        </h2>
-        <p className="text-gray-300 mb-8">
-          Feel free to reach out to discuss projects or collaborations.
-        </p>
-        <form className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <textarea
-            placeholder="Your Message"
-            className="p-3 rounded-lg bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            rows={5}
-          />
-          <button
+    <section id="contact" className="contact py-20 px-4 text-gray-100">
+      <div className="max-w-2xl mx-auto" style={{ perspective: "2000px" }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+          transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+          viewport={{ once: true, margin: "-100px" }}
+          style={{ transformStyle: "preserve-3d" }}
+          className="text-center mb-12 px-4"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
+            Contact Me
+          </h2>
+          <p className="text-gray-200 leading-relaxed">
+            Feel free to reach out to discuss job opportunities, projects, or collaborations.
+          </p>
+        </motion.div>
+
+        {/* Form Card */}
+        <motion.div
+          initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+          transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          style={{ transformStyle: "preserve-3d" }}
+          className="bg-gray-700 p-8 rounded-xl shadow-lg max-w-xl mx-auto"
+        >
+          <form id="contact-form" onSubmit={onSubmit} className="flex flex-col gap-6 items-center">
+          {/* Name Input - max-w-md (448px) width, 0.75rem (gap-3) error spacing */}
+          <div className="flex flex-col gap-3 w-full max-w-md">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your Name"
+              className={
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
+                (errors.name ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+            />
+            {errors.name && (
+              <span className="text-red-400 text-sm text-left">{errors.name}</span>
+            )}
+          </div>
+
+          {/* Email Input - max-w-md (448px) width, 0.75rem (gap-3) error spacing */}
+          <div className="flex flex-col gap-3 w-full max-w-md">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Your Email"
+              className={
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
+                (errors.email ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+            />
+            {errors.email && (
+              <span className="text-red-400 text-sm text-left">{errors.email}</span>
+            )}
+          </div>
+
+          {/* Message Textarea - full width, 0.75rem (gap-3) error spacing */}
+          <div className="flex flex-col gap-3 w-full">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Your Message"
+              className={
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
+                (errors.message ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-blue-400")
+              }
+              rows={5}
+            />
+            {errors.message && (
+              <span className="text-red-400 text-sm text-left">{errors.message}</span>
+            )}
+          </div>
+
+          <motion.button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-gray-900 font-semibold py-3 rounded-lg transition duration-300"
+            disabled={formState.submitting}
+            whileHover={!formState.submitting ? { scale: 1.05 } : {}}
+            whileTap={!formState.submitting ? { scale: 0.98 } : {}}
+            className={
+              "bg-white text-black font-semibold py-3 px-8 rounded-full transition duration-300 w-full max-w-[200px] hover:bg-gray-200 " +
+              (formState.submitting ? "opacity-75 cursor-not-allowed" : "")
+            }
           >
-            Send Message
-          </button>
+            {formState.submitting ? "Sending..." : "Send Message"}
+          </motion.button>
         </form>
+        </motion.div>
       </div>
     </section>
   );
