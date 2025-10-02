@@ -55,7 +55,7 @@ const About: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
           whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+          transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "-100px" }}
           style={{
             transformStyle: "preserve-3d",

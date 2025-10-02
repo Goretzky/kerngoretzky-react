@@ -215,21 +215,30 @@ const Certifications: React.FC = () => {
       }}
     >
       <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: ANIMATION_DURATION, ease: EASE }}
-          viewport={{ once: true, margin: "-100px" }}
-          style={{ transformStyle: "preserve-3d" }}
-          className="mb-8"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center mb-8">
-            Certifications
-          </h2>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ transformStyle: "preserve-3d" }}
+            className="col-span-full mb-8"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
+              Certifications
+            </h2>
+          </motion.div>
 
           {/* Category Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ transformStyle: "preserve-3d" }}
+            className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
+          >
             {categories.map((category) => (
               <button
                 key={category}
@@ -250,11 +259,9 @@ const Certifications: React.FC = () => {
                 {category}
               </button>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Certification Cards Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Certification Cards */}
           {filteredCertifications.map((cert, index) => (
             <motion.div
               key={index}
