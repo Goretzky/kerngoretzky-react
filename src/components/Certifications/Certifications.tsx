@@ -26,17 +26,24 @@ interface Certification {
   date: string;
   credentialId?: string;
   credentialUrl?: string;
-  category: string;
+  categories: string[];
 }
 
 const certifications: Certification[] = [
+  {
+    title: "100 Days of SwiftUI",
+    issuer: "Hacking with Swift",
+    date: "May 2025",
+    credentialUrl: "https://www.hackingwithswift.com/100/swiftui",
+    categories: ["Mobile"]
+  },
   {
     title: "Next.js & React - The Complete Guide (incl. Two Paths!)",
     issuer: "Udemy",
     date: "Sep 2023",
     credentialId: "UC-152bbf2c-6422-4dd2-b4e7-f184a4a4be6c",
     credentialUrl: "https://www.udemy.com/certificate/UC-152bbf2c-6422-4dd2-b4e7-f184a4a4be6c/",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "Clean Code",
@@ -44,7 +51,7 @@ const certifications: Certification[] = [
     date: "May 2023",
     credentialId: "UC-ef9ea775-ebed-43a1-876a-7ba2b7ab323f",
     credentialUrl: "https://www.udemy.com/certificate/UC-ef9ea775-ebed-43a1-876a-7ba2b7ab323f/",
-    category: "Best Practices"
+    categories: ["Best Practices"]
   },
   {
     title: "The Git & Github Bootcamp",
@@ -52,7 +59,7 @@ const certifications: Certification[] = [
     date: "Apr 2023",
     credentialId: "UC-adf780d9-2417-482d-8484-d9a51d7a14af",
     credentialUrl: "https://www.udemy.com/certificate/UC-adf780d9-2417-482d-8484-d9a51d7a14af/",
-    category: "Tools"
+    categories: ["Tools"]
   },
   {
     title: "Angular Universal In Depth (Angular 15)",
@@ -60,7 +67,7 @@ const certifications: Certification[] = [
     date: "Mar 2023",
     credentialId: "UC-132bac29-f228-4149-9d0a-217318d00ea6",
     credentialUrl: "https://www.udemy.com/certificate/UC-132bac29-f228-4149-9d0a-217318d00ea6/",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "Understanding TypeScript - 2022 Edition",
@@ -68,7 +75,7 @@ const certifications: Certification[] = [
     date: "May 2022",
     credentialId: "UC-efca56e7-c45a-494b-afad-2b7e5b466ca1",
     credentialUrl: "https://www.udemy.com/certificate/UC-efca56e7-c45a-494b-afad-2b7e5b466ca1/",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "Angular & NodeJS - The MEAN Stack Guide [2022 Edition]",
@@ -76,7 +83,7 @@ const certifications: Certification[] = [
     date: "Apr 2022",
     credentialId: "UC-e33c9974-a5f9-49bb-9193-6dd91c3ec561",
     credentialUrl: "https://www.udemy.com/certificate/UC-e33c9974-a5f9-49bb-9193-6dd91c3ec561/",
-    category: "Full Stack"
+    categories: ["Full Stack"]
   },
   {
     title: "LinkedIn Ads: LinkedIn Lead Generation | LinkedIn Marketing",
@@ -84,7 +91,7 @@ const certifications: Certification[] = [
     date: "Apr 2022",
     credentialId: "UC-bc71345c-ad1c-4ee6-bfef-4c31f8dad24f",
     credentialUrl: "https://www.udemy.com/certificate/UC-bc71345c-ad1c-4ee6-bfef-4c31f8dad24f/",
-    category: "Marketing"
+    categories: ["Marketing"]
   },
   {
     title: "The Web Developer Bootcamp 2022",
@@ -92,14 +99,14 @@ const certifications: Certification[] = [
     date: "Apr 2022",
     credentialId: "UC-8a4b17b8-c7cc-4d6b-983c-13b89490c88c",
     credentialUrl: "https://www.udemy.com/certificate/UC-8a4b17b8-c7cc-4d6b-983c-13b89490c88c/",
-    category: "Full Stack"
+    categories: ["Full Stack"]
   },
   {
     title: "Learning Docker",
     issuer: "LinkedIn",
     date: "Jun 2018",
     credentialUrl: "https://www.linkedin.com/learning/certificates/f5361725d07fd24b2800bfd134c5c9e8a7866126d5d8bd0bd069aca6f84b023f",
-    category: "Tools"
+    categories: ["Tools"]
   },
   {
     title: "Multiplatform Mobile App Development with Web Technologies",
@@ -107,7 +114,7 @@ const certifications: Certification[] = [
     date: "Dec 2016",
     credentialId: "JM6RMVXZMCQH",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/JM6RMVXZMCQH",
-    category: "Full Stack"
+    categories: ["Full Stack", "Mobile"]
   },
   {
     title: "Server-side Development with NodeJS",
@@ -115,7 +122,7 @@ const certifications: Certification[] = [
     date: "Nov 2016",
     credentialId: "M3YVH28Q3TJW",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/M3YVH28Q3TJW",
-    category: "Backend"
+    categories: ["Backend"]
   },
   {
     title: "Front-End JavaScript Frameworks: AngularJS",
@@ -123,7 +130,7 @@ const certifications: Certification[] = [
     date: "Oct 2016",
     credentialId: "HSU2YSV8WZYZ",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/HSU2YSV8WZYZ",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "Front-End Web UI Frameworks and Tools",
@@ -131,7 +138,7 @@ const certifications: Certification[] = [
     date: "Sep 2016",
     credentialId: "NP7T8T4Z7XG3",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/NP7T8T4Z7XG3",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "HTML, CSS and JavaScript",
@@ -139,7 +146,7 @@ const certifications: Certification[] = [
     date: "Sep 2016",
     credentialId: "HAC3JHKYGW57",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/HAC3JHKYGW57",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "Responsive Website Basics: Code with HTML, CSS, and JavaScript",
@@ -147,14 +154,14 @@ const certifications: Certification[] = [
     date: "Aug 2016",
     credentialId: "2S9J7RMBL7WR",
     credentialUrl: "https://www.coursera.org/account/accomplishments/verify/2S9J7RMBL7WR",
-    category: "Frontend"
+    categories: ["Frontend"]
   },
   {
     title: "An Introduction to Interactive Programming in Python",
     issuer: "Coursera",
     date: "Nov 2014",
-    credentialId: "F569VPMQ4A",
-    category: "Backend"
+    credentialUrl: "https://www.coursera.org/learn/interactive-python-1",
+    categories: ["Backend"]
   },
   {
     title: "Programming for Everybody (Python)",
@@ -162,49 +169,50 @@ const certifications: Certification[] = [
     date: "Sep 2014",
     credentialId: "6P4HZ46P8W",
     credentialUrl: "https://www.coursera.org/account/accomplishments/certificate/6P4HZ46P8W",
-    category: "Backend"
+    categories: ["Backend"]
   },
   {
     title: "Intro to Salesforce App Development",
     issuer: "Udacity",
     date: "Mar 2014",
-    category: "Tools"
+    categories: ["Tools"]
   },
   {
     title: "Canadian Securities Course (Honours)",
     issuer: "Canadian Securities Institute",
     date: "May 2011",
-    category: "Finance"
+    credentialUrl: "https://www.csi.ca/en/learning/courses/csc",
+    categories: ["Finance"]
   },
   {
     title: "Google Analytics Essential Training",
     issuer: "Lynda.com",
     date: "Jul 2016",
     credentialId: "E3168C",
-    category: "Marketing"
+    categories: ["Marketing"]
   },
   {
     title: "Up and Running with Python and Django",
     issuer: "Lynda.com",
     date: "Jul 2016",
     credentialId: "C5F316",
-    category: "Backend"
+    categories: ["Backend"]
   }
 ];
 
-const categories = ["All", "Frontend", "Backend", "Full Stack", "Tools", "Marketing", "Best Practices", "Finance"];
+const categories = ["All", "Frontend", "Backend", "Full Stack", "Mobile", "Tools", "Marketing", "Best Practices", "Finance"];
 
 const Certifications: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredCertifications = selectedCategory === "All"
     ? certifications
-    : certifications.filter(cert => cert.category === selectedCategory);
+    : certifications.filter(cert => cert.categories.includes(selectedCategory));
 
   return (
     <section
-      id="certifications"
-      className="certifications py-16 px-4 text-gray-100"
+      id="courses"
+      className="courses py-16 px-4 text-gray-100"
       style={{
         position: 'relative',
         background: 'rgba(255, 255, 255, 0.03)',
@@ -226,7 +234,7 @@ const Certifications: React.FC = () => {
             className="col-span-full mb-8"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
-              Certifications
+              Courses
             </h2>
           </motion.div>
 
@@ -307,17 +315,22 @@ const Certifications: React.FC = () => {
                   </p>
                 )}
 
-                {/* Category Badge */}
-                <span
-                  className="inline-block px-3 py-1 text-xs font-medium rounded-full mb-3"
-                  style={{
-                    background: 'rgba(50, 196, 196, 0.2)',
-                    border: '1px solid rgba(50, 196, 196, 0.4)',
-                    color: '#32C4C4'
-                  }}
-                >
-                  {cert.category}
-                </span>
+                {/* Category Badges */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {cert.categories.map((category, idx) => (
+                    <span
+                      key={idx}
+                      className="inline-block px-3 py-1 text-xs font-medium rounded-full"
+                      style={{
+                        background: 'rgba(50, 196, 196, 0.2)',
+                        border: '1px solid rgba(50, 196, 196, 0.4)',
+                        color: '#32C4C4'
+                      }}
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
 
                 {/* View Credential Button */}
                 {cert.credentialUrl && (
@@ -340,7 +353,7 @@ const Certifications: React.FC = () => {
                       e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
                     }}
                   >
-                    View Credential
+                    {cert.credentialId ? 'View Credential' : 'View Course'}
                   </a>
                 )}
               </div>

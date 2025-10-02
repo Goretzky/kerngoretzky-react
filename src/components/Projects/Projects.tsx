@@ -27,20 +27,20 @@ const EASE = [0.11, 0, 0.5, 0] as const; // Custom easing curve for smooth motio
 
 const projects = [
   {
-    title: "KernGoretzky.ca",
+    title: "Kern Goretzky's Blog",
     description: "React-based blog website using Next.js framework with markdown articles. A modern single-page application showcasing technical writing and web development expertise.",
     technologies: ["React", "Next.js", "Vercel", "Markdown"],
     demoUrl: "https://www.kerngoretzky.ca/",
-    githubUrl: "#", // TODO: Add GitHub repository URL
-    image: "/images/project-kerngoretzky-ca.jpg" // TODO: Add project screenshot
+    githubUrl: "https://github.com/Goretzky/nextjs-react-blog",
+    image: "/images/project-kerngoretzky-ca.jpg"
   },
   {
     title: "CoderLeaf",
     description: "Prerendered Angular website with glassmorphism design, search engine optimized. Full AWS cloud infrastructure with contact microservice and custom email integration.",
     technologies: ["Angular", "AWS S3", "CloudFront", "Lambda", "API Gateway", "Bootstrap"],
     demoUrl: "http://coderleaf.com/",
-    githubUrl: "#", // TODO: Add GitHub repository URL
-    image: "/images/project-coderleaf.jpg" // TODO: Add project screenshot
+    githubUrl: "https://github.com/Goretzky/CoderLeaf",
+    image: "/images/project-coderleaf.jpg"
   },
   {
     title: "Portfolio Website",

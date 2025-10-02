@@ -12,6 +12,12 @@
 
 ## 🚨 Action Items Required
 
+### Critical - Before Launch
+
+**⚠️ MAKE REPOSITORY PUBLIC**
+- Make kerngoretzky-react repository public on GitHub when portfolio is complete
+- Location: https://github.com/Goretzky/kerngoretzky-react
+
 ### High Priority
 
 1. **Project Screenshots** (3 images needed)
