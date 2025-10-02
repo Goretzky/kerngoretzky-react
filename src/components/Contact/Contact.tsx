@@ -115,14 +115,6 @@ const Contact: React.FC = () => {
     <section
       id="contact"
       className="contact py-20 px-4 text-gray-100"
-      style={{
-        position: 'relative',
-        background: 'rgba(255, 255, 255, 0.03)',
-        backdropFilter: 'blur(5px)',
-        WebkitBackdropFilter: 'blur(5px)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.2)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
-      }}
     >
       <div className="max-w-2xl mx-auto" style={{ perspective: "2000px" }}>
         {/* Header */}
