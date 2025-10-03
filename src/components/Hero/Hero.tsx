@@ -154,17 +154,17 @@ const Hero: React.FC = () => {
               opacity: 0,
               backdropFilter: 'blur(0px)',
               WebkitBackdropFilter: 'blur(0px)'
-            }}
+            } as any}
             animate={{
               opacity: 1,
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)'
-            }}
+            } as any}
             transition={{
               opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
               backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
               WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
-            }}
+            } as any}
             whileHover={{ scale: 1.05 }}
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
@@ -191,17 +191,17 @@ const Hero: React.FC = () => {
               opacity: 0,
               backdropFilter: 'blur(0px)',
               WebkitBackdropFilter: 'blur(0px)'
-            }}
+            } as any}
             animate={{
               opacity: 1,
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)'
-            }}
+            } as any}
             transition={{
               opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
               backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
               WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
-            }}
+            } as any}
             whileHover={{ scale: 1.05 }}
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
@@ -228,17 +228,17 @@ const Hero: React.FC = () => {
               opacity: 0,
               backdropFilter: 'blur(0px)',
               WebkitBackdropFilter: 'blur(0px)'
-            }}
+            } as any}
             animate={{
               opacity: 1,
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)'
-            }}
+            } as any}
             transition={{
               opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
               backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
               WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
-            }}
+            } as any}
             whileHover={{ scale: 1.05 }}
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
@@ -265,17 +265,17 @@ const Hero: React.FC = () => {
               opacity: 0,
               backdropFilter: 'blur(0px)',
               WebkitBackdropFilter: 'blur(0px)'
-            }}
+            } as any}
             animate={{
               opacity: 1,
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)'
-            }}
+            } as any}
             transition={{
               opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
               backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
               WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
-            }}
+            } as any}
             whileHover={{ scale: 1.05 }}
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
