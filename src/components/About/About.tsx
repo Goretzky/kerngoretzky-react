@@ -14,6 +14,7 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters
 // Matches Projects section exactly for visual consistency
@@ -23,6 +24,8 @@ const ANIMATION_DURATION = 1.8;  // Total animation time in seconds (matches Pro
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motion
 
 const About: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="about"
@@ -39,9 +42,9 @@ const About: React.FC = () => {
       <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "-100px" }}
           style={{ transformStyle: "preserve-3d" }}
           className="mb-12 px-4"
@@ -53,9 +56,9 @@ const About: React.FC = () => {
 
         {/* Content Card - Expanded with skills and education */}
         <motion.div
-          initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "-100px" }}
           style={{
             transformStyle: "preserve-3d",
@@ -153,7 +156,7 @@ const About: React.FC = () => {
             {/* Download Resume Button */}
             <div className="pt-4">
               <a
-                href="#" // TODO: Add resume PDF link
+                href="/KERN_GORETZKY_RESUME.pdf"
                 download
                 className="inline-block px-6 py-3 font-semibold rounded-full transition-all duration-300"
                 style={{

@@ -11,6 +11,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters (matching Projects section)
 const ROTATION_ANGLE = 90;
@@ -204,6 +205,7 @@ const categories = ["All", "Frontend", "Backend", "Full Stack", "Mobile", "Tools
 
 const Certifications: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const prefersReducedMotion = useReducedMotion();
 
   const filteredCertifications = selectedCategory === "All"
     ? certifications
@@ -226,9 +228,9 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div
-            initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "-100px" }}
             style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8"
@@ -240,9 +242,9 @@ const Certifications: React.FC = () => {
 
           {/* Category Filter Buttons */}
           <motion.div
-            initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
             style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
@@ -251,6 +253,8 @@ const Certifications: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
+                aria-label={`Filter courses by ${category}`}
+                aria-pressed={selectedCategory === category}
                 className="px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
                 style={{
                   background: selectedCategory === category
@@ -273,10 +277,10 @@ const Certifications: React.FC = () => {
           {filteredCertifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-              whileHover={{ y: HOVER_LIFT, transition: { duration: 0.2 } }}
-              transition={{
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
+              transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
                 ease: EASE,
                 delay: index * STAGGER_DELAY

@@ -1,11 +1,14 @@
 // src/components/Hero/Hero.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const Hero: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   // Reference to the hero section for measuring scroll position
   const heroRef = useRef<HTMLElement | null>(null);
-  
+
   // State to track scroll progress (0 to 1)
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -126,9 +129,9 @@ const Hero: React.FC = () => {
       <motion.div
         className="relative text-center px-6"
         style={{ zIndex: 3 }}
-        initial={{ opacity: 0, y: 30 }}
+        initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.9, ease: "easeOut" }}
       >
         <h1 className="hero-title font-extrabold tracking-tight leading-[0.95] big-shoulders-hero">
           KERN GORETZKY
@@ -136,9 +139,9 @@ const Hero: React.FC = () => {
 
         <motion.p
           className="hero-subtitle mt-6 text-gray-100 max-w-3xl mx-auto"
-          initial={{ opacity: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.0, delay: 0.25 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.0, delay: 0.25 }}
         >
           Building sleek, modern websites & immersive digital experiences.
         </motion.p>
@@ -216,6 +219,43 @@ const Hero: React.FC = () => {
             }}
           >
             <span className="relative z-10">View Projects</span>
+            <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
+          </motion.a>
+          <motion.a
+            href="#courses"
+            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            initial={{
+              opacity: 0,
+              backdropFilter: 'blur(0px)',
+              WebkitBackdropFilter: 'blur(0px)'
+            }}
+            animate={{
+              opacity: 1,
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)'
+            }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
+              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+            }}
+            whileHover={{ scale: 1.05 }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+            }}
+          >
+            <span className="relative z-10">Courses</span>
             <span className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50 pointer-events-none"></span>
           </motion.a>
           <motion.a

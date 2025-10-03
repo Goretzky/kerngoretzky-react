@@ -10,19 +10,16 @@ import Footer from "./components/Footer/Footer";
 const App = () => {
   return (
     <div className="bg-gray-900 text-white">
+      <Header />
       <Hero /> {/* full width hero */}
-      <div id="root">
-        <Header />
-        <main>
-          <About />
-          <Projects />
-          <Certifications />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-  </div>
-
+      <main>
+        <About />
+        <Projects />
+        <Certifications />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

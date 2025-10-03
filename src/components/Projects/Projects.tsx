@@ -15,6 +15,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters
 // Core animation values - used by both About and Projects sections
@@ -53,14 +54,16 @@ const projects = [
 ];
 
 const Projects: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section id="projects" className="projects py-16 px-4 text-gray-100">
       <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: ANIMATION_DURATION, ease: EASE }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "-100px" }}
             style={{
               transformStyle: "preserve-3d"
@@ -79,13 +82,13 @@ const Projects: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               // Initial state: invisible, shifted right, and rotated
-              initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
               // Final state: visible, centered, and flat
-              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
               // Hover animation: lift card up slightly
-              whileHover={{ y: HOVER_LIFT, transition: { duration: 0.2 } }}
+              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
               // Animation timing and easing
-              transition={{
+              transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
                 ease: [0.11, 0, 0.5, 0], // Custom easing curve for smooth animation
                 delay: index * STAGGER_DELAY // Creates cascading effect

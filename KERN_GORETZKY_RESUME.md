@@ -3,7 +3,8 @@
 **Full-Stack Web Developer**
 
 📧 kern.goretzky@gmail.com | 📍 Toronto, Ontario
-🔗 [LinkedIn](https://linkedin.com/in/kern-goretzky) | [GitHub](https://github.com/Goretzky) | [Portfolio](https://kerngoretzky.com)
+🔗 [LinkedIn](https://www.linkedin.com/in/goretzky/) | [GitHub](https://github.com/Goretzky) | [Portfolio](https://kerngoretzky.com)
+
 
 ---
 
@@ -16,16 +17,19 @@ Full-stack web developer with 8+ years of experience building modern, responsive
 ## TECHNICAL SKILLS
 
 **Frontend Development**
-React • Angular • TypeScript • JavaScript • HTML5 • CSS3 • Tailwind CSS • Bootstrap • SASS/SCSS • Framer Motion
+React • Angular • TypeScript • JavaScript • HTML5 • CSS3 • Tailwind CSS • Bootstrap • SASS/SCSS • Framer Motion • Next.js
 
 **Backend Development**
-Node.js • Express.js • MongoDB • RESTful APIs
+Node.js • Express.js • MongoDB • SQL • RESTful APIs
 
 **Cloud & DevOps**
 AWS (S3, CloudFront, Lambda, API Gateway, Route 53, IAM) • Vercel • Git/GitHub
 
+**Mobile**
+SwiftUI
+
 **Additional Tools**
-Next.js • Angular Material • Angular Router • WordPress • reCAPTCHA • Amazon WorkMail • Claude Code • GitHub Copilot • AI-Assisted Development • Prompt Engineering
+Angular Material • Angular Router • WordPress • reCAPTCHA • Amazon WorkMail • Claude Code • GitHub Copilot • AI-Assisted Development • Prompt Engineering
 
 ---
 
@@ -36,10 +40,10 @@ Next.js • Angular Material • Angular Router • WordPress • reCAPTCHA • 
 *March 2015 – Present*
 
 - Engineer and maintain full-stack web applications using React, Next.js, Angular, Node.js, and MongoDB
-- Architect and develop responsive, user-friendly interfaces with modern UI frameworks and glassmorphism design patterns
+- Architect and develop responsive, user-friendly interfaces with modern UI frameworks and design patterns
 - Design and deploy cloud infrastructure on AWS, including S3 static hosting, CloudFront CDN, Lambda functions, and API Gateway integrations
 - Execute SEO optimization strategies and digital marketing solutions to improve online visibility
-- Build secure contact microservices with reCAPTCHA integration and custom email workflows using Amazon WorkMail
+- Build secure contact microservices with reCAPTCHA integration and custom email workflows using Amazon WorkMail and Gmail
 - Continuously expand technical skills through online courses (Udemy, Udacity, Coursera) in web development and emerging technologies
 
 ### Marketing Manager
@@ -55,8 +59,8 @@ Next.js • Angular Material • Angular Router • WordPress • reCAPTCHA • 
 **Bell Media** | Toronto, Ontario
 *September 2008 – February 2015*
 
-- Managed programming acquisition and scheduling for national television network
-- Led cross-functional teams in content strategy and development initiatives
+- Managed programming acquisitions for a television channel
+- Led content strategy and development initiatives
 - Provided regulatory guidance for broadcast content compliance
 - Analyzed viewership data to inform programming decisions and optimize schedule performance
 
@@ -64,8 +68,8 @@ Next.js • Angular Material • Angular Router • WordPress • reCAPTCHA • 
 
 ## KEY PROJECTS
 
-### KernGoretzky.ca
-**React Blog Platform** | [www.kerngoretzky.ca](https://www.kerngoretzky.ca)
+### Kern Goretzky Blog
+**React Blog Platform** | [kerngoretzky.ca](https://kerngoretzky.ca)
 
 - Built modern blog website using React and Next.js framework with server-side rendering
 - Implemented markdown-based content management system for easy article creation and updates
@@ -78,13 +82,13 @@ Next.js • Angular Material • Angular Router • WordPress • reCAPTCHA • 
 - Developed prerendered Angular website with glassmorphism design and advanced routing
 - Architected comprehensive AWS cloud infrastructure including S3, CloudFront, Route 53, and Certificate Manager
 - Built serverless contact form microservice using AWS Lambda and API Gateway
-- Integrated reCAPTCHA security and custom email solution with Amazon WorkMail
+- Integrated reCAPTCHA security and custom email solution with Amazon WorkMail and Gmail
 - Implemented SEO best practices for improved search engine visibility
 
 ### Portfolio Website
-**React Portfolio with Glassmorphism Design** | [GitHub Repository](https://github.com/Goretzky/kerngoretzky-react)
+**React Portfolio with Liquid Glass Design** | [kerngoretzky.com](https://kerngoretzky.com)
 
-- Developed modern portfolio website featuring liquid glass morphism design system
+- Developed modern portfolio website featuring liquid glass design system
 - Implemented smooth animations and transitions using Framer Motion library
 - Built with React, TypeScript, and Tailwind CSS, leveraging Claude Code for accelerated development workflow
 - Designed responsive layout with accessibility best practices and SEO optimization

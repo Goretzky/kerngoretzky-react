@@ -2,78 +2,43 @@
 
 ## ✅ Completed Tasks
 
-1. **Header Component** - Glassmorphism navigation with smooth scroll
+1. **Header Component** - Glassmorphism navigation with smooth scroll + Courses link
 2. **Real Projects Data** - KernGoretzky.ca, CoderLeaf, and Portfolio Website
 3. **Footer Component** - Social links, navigation, and back to top
-4. **Enhanced About Section** - Skills, education, and resume download
+4. **Enhanced About Section** - Skills, education, resume download, and social links
 5. **SEO Meta Tags** - Open Graph and Twitter Cards
+6. **Courses Section** - 21 professional certifications with category filtering
+7. **Project Screenshots** - All 3 responsive images (kerngoretzky.ca, CoderLeaf, Portfolio)
+8. **Social Media URLs** - GitHub, LinkedIn, Bluesky links in Footer and About
+9. **Resume PDF** - Added to `/public/KERN_GORETZKY_RESUME.pdf` and linked
+10. **GitHub Repository URLs** - Both repos (blog, CoderLeaf) public and linked
+11. **Open Graph Images** - `/public/og-image.jpg` (1200x630px) and `/public/twitter-image.jpg` (1200x675px)
+12. **Favicon** - Created `/public/favicon.ico` from favicon.png
+13. **Repository Made Public** - https://github.com/Goretzky/kerngoretzky-react
 
 ---
 
-## 🚨 Action Items Required
+## 📋 Accessibility - Completed
 
-### Critical - Before Launch
+**All accessibility requirements have been implemented:**
 
-**⚠️ MAKE REPOSITORY PUBLIC**
-- Make kerngoretzky-react repository public on GitHub when portfolio is complete
-- Location: https://github.com/Goretzky/kerngoretzky-react
+### Completed Checklist:
+- ✅ Add ARIA labels to all interactive elements (buttons, links, forms)
+- ✅ Add proper form labels with htmlFor/id associations
+- ✅ Add skip navigation link for keyboard users
+- ✅ Implement prefers-reduced-motion support across all animations
+- ✅ Verify focus states use cyan accent color (#32C4C4)
+- ✅ Ensure all images have alt text
+- ✅ Add ARIA attributes (aria-label, aria-pressed, aria-invalid, aria-describedby)
+- ✅ Add role="alert" for error messages
 
-### High Priority
-
-1. **Project Screenshots** (3 images needed)
-   - `/public/images/project-kerngoretzky-ca.jpg`
-   - `/public/images/project-coderleaf.jpg`
-   - `/public/images/project-portfolio.jpg`
-   - **Files**: `src/components/Projects/Projects.tsx` (lines 35, 43, 51)
-
-2. **Social Media URLs** (3 links needed)
-   - GitHub profile URL
-   - LinkedIn profile URL
-   - Twitter/X profile URL
-   - **File**: `src/components/Footer/Footer.tsx` (lines 17, 23, 29)
-
-3. **Resume/CV PDF**
-   - Add resume PDF file to `/public` folder
-   - Update download link in About section
-   - **File**: `src/components/About/About.tsx` (line 142)
-
-### Medium Priority
-
-4. **GitHub Repository URLs** (2 links needed)
-   - KernGoretzky.ca GitHub repo
-   - CoderLeaf GitHub repo
-   - **File**: `src/components/Projects/Projects.tsx` (lines 34, 42)
-
-5. **Open Graph Images** (2 images needed)
-   - `/public/og-image.jpg` (1200x630px recommended)
-   - `/public/twitter-image.jpg` (1200x675px recommended)
-   - **File**: `index.html` (lines 19, 27)
-
-6. **Favicon**
-   - Create favicon using cyan color #32C4C4
-   - Add `/public/favicon.ico`
-   - **File**: `index.html` (line 31)
-
----
-
-## 📋 Future Enhancement - Accessibility Review
-
-**Reminder**: Review accessibility after placeholder content is filled
-
-### Checklist:
-- [ ] Add ARIA labels to all interactive elements (buttons, links, forms)
+**Remaining Manual Testing** (User to complete):
 - [ ] Test keyboard navigation (Tab, Enter, Escape)
-- [ ] Verify focus states use cyan accent color (#32C4C4)
 - [ ] Check color contrast ratios with glass effects
 - [ ] Test with screen reader (VoiceOver on Mac, NVDA on Windows)
-- [ ] Ensure all images have alt text (when added)
-- [ ] Verify form labels are properly associated
-- [ ] Test skip navigation links
-
-**Tools to use:**
-- axe DevTools browser extension
-- WAVE accessibility evaluation tool
-- Chrome Lighthouse audit
+- [ ] Run Chrome Lighthouse audit
+- [ ] Test with axe DevTools browser extension
+- [ ] Test with WAVE accessibility evaluation tool
 
 ---
 
@@ -88,13 +53,14 @@
 - **Font (Body)**: League Spartan
 
 ### Components Created
-- ✅ Header (glassmorphism nav with scroll effect)
-- ✅ Hero (liquid glass buttons with 3.5s blur animation)
-- ✅ About (expanded with skills and education)
+- ✅ Header (glassmorphism nav with scroll effect + Courses link)
+- ✅ Hero (4 liquid glass buttons with 3.5s blur animation: About, Projects, Courses, Contact)
+- ✅ About (expanded with skills, education, resume, social links)
 - ✅ Projects (real data with tech stack and links)
-- ✅ Contact (liquid glass form with cyan focus)
+- ✅ Courses (21 certifications with category filtering)
+- ✅ Contact (liquid glass form with cyan focus and proper labels)
 - ✅ Footer (social links and navigation)
 
 ---
 
-**Last Updated**: ${new Date().toISOString().split('T')[0]}
+**Last Updated**: 2025-10-03
