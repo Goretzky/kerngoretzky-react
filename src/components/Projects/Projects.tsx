@@ -64,7 +64,7 @@ const Projects: React.FC = () => {
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
             whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px" }}
             style={{
               transformStyle: "preserve-3d"
             }}
@@ -94,7 +94,7 @@ const Projects: React.FC = () => {
                 delay: index * STAGGER_DELAY // Creates cascading effect
               }}
               // Viewport settings: trigger when in view, only animate once
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "0px" }}
               // Enable 3D transforms
               style={{
                 transformStyle: "preserve-3d",

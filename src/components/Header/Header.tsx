@@ -46,16 +46,16 @@ const Header = () => {
           boxShadow: scrolled ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none'
         }}
       >
-        <nav className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4" aria-label="Main navigation">
+        <nav className="max-w-6xl mx-auto flex justify-between items-center px-4 md:px-6 py-3 md:py-4" aria-label="Main navigation">
         <a
           href="#hero"
           onClick={(e) => handleSmoothScroll(e, "hero")}
-          className="text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-300"
+          className="text-xl md:text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-300"
           style={{ fontFamily: "'Big Shoulders', sans-serif" }}
         >
           KERN GORETZKY
         </a>
-        <ul className="flex space-x-8">
+        <ul className="flex space-x-4 md:space-x-8 text-sm md:text-base">
           <li>
             <a
               href="#about"

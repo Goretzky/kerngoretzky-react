@@ -146,10 +146,10 @@ const Hero: React.FC = () => {
           Building sleek, modern websites & immersive digital experiences.
         </motion.p>
 
-        <div className="mt-10 flex justify-center gap-6">
+        <div className="mt-10 flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
           <motion.a
             href="#about"
-            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            className="glass-button relative px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold text-white rounded-full overflow-hidden block"
             initial={{
               opacity: 0,
               backdropFilter: 'blur(0px)',
@@ -186,7 +186,7 @@ const Hero: React.FC = () => {
           </motion.a>
           <motion.a
             href="#projects"
-            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            className="glass-button relative px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold text-white rounded-full overflow-hidden block"
             initial={{
               opacity: 0,
               backdropFilter: 'blur(0px)',
@@ -223,7 +223,7 @@ const Hero: React.FC = () => {
           </motion.a>
           <motion.a
             href="#courses"
-            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            className="glass-button relative px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold text-white rounded-full overflow-hidden block"
             initial={{
               opacity: 0,
               backdropFilter: 'blur(0px)',
@@ -260,7 +260,7 @@ const Hero: React.FC = () => {
           </motion.a>
           <motion.a
             href="#contact"
-            className="glass-button relative px-8 py-4 text-lg font-semibold text-white rounded-full overflow-hidden block"
+            className="glass-button relative px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-semibold text-white rounded-full overflow-hidden block"
             initial={{
               opacity: 0,
               backdropFilter: 'blur(0px)',

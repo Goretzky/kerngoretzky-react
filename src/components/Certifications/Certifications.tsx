@@ -231,7 +231,7 @@ const Certifications: React.FC = () => {
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
             whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px" }}
             style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8"
           >
@@ -245,7 +245,7 @@ const Certifications: React.FC = () => {
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
             whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "0px" }}
             style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
           >
@@ -285,7 +285,7 @@ const Certifications: React.FC = () => {
                 ease: EASE,
                 delay: index * STAGGER_DELAY
               }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "0px" }}
               style={{
                 transformStyle: "preserve-3d",
                 background: 'rgba(255, 255, 255, 0.1)',
