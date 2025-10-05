@@ -17,10 +17,14 @@ const Header = () => {
     e.preventDefault();
     const target = document.getElementById(targetId);
     if (target) {
+      // Calculate offset to account for fixed header
+      const headerOffset = 80; // Height of fixed header + some spacing
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
       // Respect reduced motion preference
-      target.scrollIntoView({
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-        block: "start"
+      window.scrollTo({
+        top: targetPosition,
+        behavior: prefersReducedMotion ? "auto" : "smooth"
       });
     }
   };
