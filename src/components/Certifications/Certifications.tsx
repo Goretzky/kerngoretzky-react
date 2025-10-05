@@ -16,9 +16,9 @@ import { useReducedMotion } from "../../hooks/useReducedMotion";
 // Animation Parameters (matching Projects section)
 const ROTATION_ANGLE = 90;
 const SLIDE_DISTANCE = 100;
-const ANIMATION_DURATION = 1.8;
+const ANIMATION_DURATION = 0.8;
 const HOVER_LIFT = -4;
-const STAGGER_DELAY = 0.1;
+const STAGGER_DELAY = 0.06561;
 const EASE = [0.11, 0, 0.5, 0] as const;
 
 interface Certification {
@@ -255,7 +255,7 @@ const Certifications: React.FC = () => {
                 onClick={() => setSelectedCategory(category)}
                 aria-label={`Filter courses by ${category}`}
                 aria-pressed={selectedCategory === category}
-                className="px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
+                className="px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-[197ms]"
                 style={{
                   background: selectedCategory === category
                     ? 'rgba(50, 196, 196, 0.3)'
@@ -279,7 +279,7 @@ const Certifications: React.FC = () => {
               key={index}
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
               whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
-              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
+              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
               transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
                 ease: EASE,
@@ -342,7 +342,7 @@ const Certifications: React.FC = () => {
                     href={cert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300 mt-3"
+                    className="block text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-[197ms] mt-3"
                     style={{
                       background: 'rgba(255, 255, 255, 0.1)',
                       border: '1px solid rgba(255, 255, 255, 0.2)',

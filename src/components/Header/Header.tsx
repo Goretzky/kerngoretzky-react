@@ -37,7 +37,7 @@ const Header = () => {
       </a>
 
       <header
-        className="fixed w-full z-50 transition-all duration-300"
+        className="fixed w-full z-50 transition-all duration-[197ms]"
         style={{
           background: scrolled ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
           backdropFilter: scrolled ? 'blur(10px)' : 'none',
@@ -50,7 +50,7 @@ const Header = () => {
         <a
           href="#hero"
           onClick={(e) => handleSmoothScroll(e, "hero")}
-          className="text-xl md:text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-300"
+          className="text-xl md:text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-[197ms]"
           style={{ fontFamily: "'Big Shoulders', sans-serif" }}
         >
           KERN GORETZKY
@@ -60,7 +60,7 @@ const Header = () => {
             <a
               href="#about"
               onClick={(e) => handleSmoothScroll(e, "about")}
-              className="text-white hover:text-[#32C4C4] transition-colors duration-300 font-medium"
+              className="text-white hover:text-[#32C4C4] transition-colors duration-[197ms] font-medium"
             >
               About
             </a>
@@ -69,7 +69,7 @@ const Header = () => {
             <a
               href="#projects"
               onClick={(e) => handleSmoothScroll(e, "projects")}
-              className="text-white hover:text-[#32C4C4] transition-colors duration-300 font-medium"
+              className="text-white hover:text-[#32C4C4] transition-colors duration-[197ms] font-medium"
             >
               Projects
             </a>
@@ -78,7 +78,7 @@ const Header = () => {
             <a
               href="#courses"
               onClick={(e) => handleSmoothScroll(e, "courses")}
-              className="text-white hover:text-[#32C4C4] transition-colors duration-300 font-medium"
+              className="text-white hover:text-[#32C4C4] transition-colors duration-[197ms] font-medium"
             >
               Courses
             </a>
@@ -87,7 +87,7 @@ const Header = () => {
             <a
               href="#contact"
               onClick={(e) => handleSmoothScroll(e, "contact")}
-              className="text-white hover:text-[#32C4C4] transition-colors duration-300 font-medium"
+              className="text-white hover:text-[#32C4C4] transition-colors duration-[197ms] font-medium"
             >
               Contact
             </a>

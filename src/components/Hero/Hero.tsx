@@ -127,11 +127,11 @@ const Hero: React.FC = () => {
 
       {/* Hero content - always on top */}
       <motion.div
-        className="relative text-center px-6"
+        className="relative text-center px-6 pt-20 md:pt-0"
         style={{ zIndex: 3 }}
         initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.9, ease: "easeOut" }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.729, ease: "easeOut" }}
       >
         <h1 className="hero-title font-extrabold tracking-tight leading-[0.95] big-shoulders-hero">
           KERN GORETZKY
@@ -141,7 +141,7 @@ const Hero: React.FC = () => {
           className="hero-subtitle mt-6 text-gray-100 max-w-3xl mx-auto"
           initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.0, delay: 0.25 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.81, delay: 0.2025 }}
         >
           Building sleek, modern websites & immersive digital experiences.
         </motion.p>
@@ -161,9 +161,9 @@ const Hero: React.FC = () => {
               WebkitBackdropFilter: 'blur(10px)'
             } as any}
             transition={{
-              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
-              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
-              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+              opacity: { duration: 0.648, delay: 0.3645, ease: "easeOut" },
+              backdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" }
             } as any}
             whileHover={{ scale: 1.05 }}
             style={{
@@ -198,9 +198,9 @@ const Hero: React.FC = () => {
               WebkitBackdropFilter: 'blur(10px)'
             } as any}
             transition={{
-              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
-              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
-              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+              opacity: { duration: 0.648, delay: 0.3645, ease: "easeOut" },
+              backdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" }
             } as any}
             whileHover={{ scale: 1.05 }}
             style={{
@@ -235,9 +235,9 @@ const Hero: React.FC = () => {
               WebkitBackdropFilter: 'blur(10px)'
             } as any}
             transition={{
-              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
-              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
-              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+              opacity: { duration: 0.648, delay: 0.3645, ease: "easeOut" },
+              backdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" }
             } as any}
             whileHover={{ scale: 1.05 }}
             style={{
@@ -272,9 +272,9 @@ const Hero: React.FC = () => {
               WebkitBackdropFilter: 'blur(10px)'
             } as any}
             transition={{
-              opacity: { duration: 0.8, delay: 0.45, ease: "easeOut" },
-              backdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" },
-              WebkitBackdropFilter: { duration: 3.5, delay: 0.45, ease: "easeOut" }
+              opacity: { duration: 0.648, delay: 0.3645, ease: "easeOut" },
+              backdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" },
+              WebkitBackdropFilter: { duration: 2.835, delay: 0.3645, ease: "easeOut" }
             } as any}
             whileHover={{ scale: 1.05 }}
             style={{

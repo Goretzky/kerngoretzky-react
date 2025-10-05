@@ -20,7 +20,7 @@ import { useReducedMotion } from "../../hooks/useReducedMotion";
 // Matches Projects section exactly for visual consistency
 const ROTATION_ANGLE = 90;      // Initial rotation in degrees (90° rotation around Y axis)
 const SLIDE_DISTANCE = 100;     // Distance of horizontal slide-in motion (pixels)
-const ANIMATION_DURATION = 1.8;  // Total animation time in seconds (matches Projects)
+const ANIMATION_DURATION = 0.8;  // Total animation time in seconds (matches Projects)
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motion
 
 const About: React.FC = () => {
@@ -158,7 +158,7 @@ const About: React.FC = () => {
               <a
                 href="/KERN_GORETZKY_RESUME.pdf"
                 download
-                className="inline-block px-6 py-3 font-semibold rounded-full transition-all duration-300"
+                className="inline-block px-6 py-3 font-semibold rounded-full transition-all duration-[197ms]"
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -184,7 +184,7 @@ const About: React.FC = () => {
                 href="https://github.com/Goretzky"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-200"
+                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[131ms]"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -195,7 +195,7 @@ const About: React.FC = () => {
                 href="https://www.linkedin.com/in/goretzky/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-200"
+                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[131ms]"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -206,7 +206,7 @@ const About: React.FC = () => {
                 href="https://bsky.app/profile/kerngoretzky.bsky.social"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-200"
+                className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[131ms]"
                 aria-label="Bluesky"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 600 530" aria-hidden="true">

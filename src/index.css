@@ -8,6 +8,8 @@ html, body {
   background-color: #111827; /* dark background for the site */
   color: #f9fafb; /* light text color */
   line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 

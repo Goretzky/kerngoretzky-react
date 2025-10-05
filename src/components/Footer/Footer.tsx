@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#about"
-                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-300 text-sm"
+                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[197ms] text-sm"
                 >
                   About
                 </a>
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#projects"
-                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-300 text-sm"
+                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[197ms] text-sm"
                 >
                   Projects
                 </a>
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#courses"
-                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-300 text-sm"
+                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[197ms] text-sm"
                 >
                   Courses
                 </a>
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
               <li>
                 <a
                   href="#contact"
-                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-300 text-sm"
+                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[197ms] text-sm"
                 >
                   Contact
                 </a>
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-300"
+                  className="text-gray-300 hover:text-[#32C4C4] transition-colors duration-[197ms]"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
           {/* Back to Top Button */}
           <button
             onClick={scrollToTop}
-            className="px-6 py-2 text-sm font-semibold rounded-full transition-all duration-300"
+            className="px-6 py-2 text-sm font-semibold rounded-full transition-all duration-[197ms]"
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
