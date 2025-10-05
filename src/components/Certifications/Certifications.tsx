@@ -9,16 +9,16 @@
  * - Glassmorphism design matching Projects section
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters (matching Projects section)
 const ROTATION_ANGLE = 90;
 const SLIDE_DISTANCE = 100;
-const ANIMATION_DURATION = 0.8;
+const ANIMATION_DURATION = 0.6;
 const HOVER_LIFT = -4;
-const STAGGER_DELAY = 0.06561;
+const STAGGER_DELAY = 0.03;
 const EASE = [0.11, 0, 0.5, 0] as const;
 
 interface Certification {
@@ -205,14 +205,48 @@ const categories = ["All", "Frontend", "Backend", "Full Stack", "Mobile", "Tools
 
 const Certifications: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reset showAll when category changes
+  useEffect(() => {
+    setShowAll(false);
+  }, [selectedCategory]);
 
   const filteredCertifications = selectedCategory === "All"
     ? certifications
     : certifications.filter(cert => cert.categories.includes(selectedCategory));
 
+  const displayLimit = isMobile ? 3 : 6;
+  const displayedCertifications = showAll
+    ? filteredCertifications
+    : filteredCertifications.slice(0, displayLimit);
+
+  const handleShowMoreToggle = () => {
+    if (showAll && sectionRef.current) {
+      // When collapsing, scroll to top of section first
+      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Then collapse after a brief delay to allow scroll to initiate
+      setTimeout(() => setShowAll(false), 100);
+    } else {
+      // When expanding, just toggle immediately
+      setShowAll(true);
+    }
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="courses"
       className="courses py-16 px-4 text-gray-100"
       style={{
@@ -274,7 +308,7 @@ const Certifications: React.FC = () => {
           </motion.div>
 
           {/* Certification Cards */}
-          {filteredCertifications.map((cert, index) => (
+          {displayedCertifications.map((cert, index) => (
             <motion.div
               key={index}
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
@@ -363,6 +397,38 @@ const Certifications: React.FC = () => {
               </div>
             </motion.div>
           ))}
+
+          {/* Show More/Less Button */}
+          {filteredCertifications.length > displayLimit && (
+            <div className="col-span-full flex justify-center mt-8">
+              <button
+                onClick={handleShowMoreToggle}
+                className="px-8 py-3 text-base font-semibold rounded-full transition-all duration-[197ms]"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#ffffff',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                }}
+              >
+                {showAll
+                  ? 'Show Less'
+                  : `Show All ${filteredCertifications.length} Courses`}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
