@@ -61,6 +61,19 @@
 - ✅ Contact (liquid glass form with cyan focus and proper labels)
 - ✅ Footer (social links and navigation)
 
+### Project Image Guidelines
+**IMPORTANT**: All project screenshots must follow these specifications:
+- **Aspect Ratio**: 1.81:1 (approximately 16:9)
+- **Standard Dimensions**:
+  - Main image: 1024×566px or 1661×918px
+  - 1024w variant: 1024×566px
+  - 768w variant: 768×424px
+  - 480w variant: 480×265px
+- **Format**: Both JPG and WebP versions required
+- **Cropping**: Preserve top content, crop from bottom if needed
+- **WebP Generation**: Use `cwebp -q 85 input.jpg -o output.webp`
+- This ensures consistent letterboxing (top/bottom only) across all project cards
+
 ---
 
-**Last Updated**: 2025-10-03
+**Last Updated**: 2025-10-06
