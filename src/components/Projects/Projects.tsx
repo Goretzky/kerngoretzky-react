@@ -133,7 +133,7 @@ const Projects: React.FC = () => {
                       `}
                       sizes="(max-width: 768px) 480px, (max-width: 1024px) 768px, 1024px"
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       loading="lazy"
                     />
                   </picture>
