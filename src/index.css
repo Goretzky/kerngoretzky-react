@@ -160,6 +160,13 @@ footer {
   margin: 0;
 }
 
+/* Reduce hero title size in landscape mode on small screens */
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero-title {
+    font-size: clamp(4rem, 8vw, 6rem);
+  }
+}
+
 .hero-subtitle {
   font-size: clamp(2rem, 2.5vw, 1.75rem);
   margin: 0;

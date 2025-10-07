@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
 
       {/* Hero content - always on top */}
       <motion.div
-        className="relative text-center px-6 pt-20 md:pt-0 pb-16 md:pb-20"
+        className="relative text-center px-6 pt-24 landscape:pt-32 md:pt-0 pb-16 md:pb-20"
         style={{ zIndex: 3 }}
         initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
