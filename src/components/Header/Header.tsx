@@ -54,12 +54,12 @@ const Header = () => {
         <a
           href="#hero"
           onClick={(e) => handleSmoothScroll(e, "hero")}
-          className="text-xl md:text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-[197ms]"
+          className="text-lg md:text-2xl font-bold text-white hover:text-[#32C4C4] transition-colors duration-[197ms]"
           style={{ fontFamily: "'Big Shoulders', sans-serif" }}
         >
           KERN GORETZKY
         </a>
-        <ul className="flex space-x-4 md:space-x-8 text-sm md:text-base">
+        <ul className="flex space-x-6 md:space-x-8 text-sm md:text-base">
           <li>
             <a
               href="#about"
