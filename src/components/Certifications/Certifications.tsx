@@ -235,9 +235,16 @@ const Certifications: React.FC = () => {
   const handleShowMoreToggle = () => {
     if (showAll && sectionRef.current) {
       // When collapsing, scroll to top of section first
-      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Then collapse after a brief delay to allow scroll to initiate
-      setTimeout(() => setShowAll(false), 100);
+      const headerOffset = 80; // Height of fixed header
+      const targetPosition = sectionRef.current.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+
+      // Then collapse after delay to allow scroll to complete (longer delay for mobile)
+      setTimeout(() => setShowAll(false), 300);
     } else {
       // When expanding, just toggle immediately
       setShowAll(true);
