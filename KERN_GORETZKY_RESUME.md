@@ -2,8 +2,7 @@
 
 **Full-Stack Web Developer**
 
-📧 kern.goretzky@gmail.com | 📍 Toronto, Ontario
-🔗 [LinkedIn](https://www.linkedin.com/in/goretzky/) | [GitHub](https://github.com/Goretzky) | [Portfolio](https://kerngoretzky.com)
+📧 kern.goretzky@gmail.com | 📍 Toronto, Ontario | 🔗 [LinkedIn](https://www.linkedin.com/in/goretzky/) | [GitHub](https://github.com/Goretzky) | [Portfolio](https://kerngoretzky.com)
 
 
 ---
