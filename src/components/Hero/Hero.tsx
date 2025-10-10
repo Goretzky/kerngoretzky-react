@@ -85,8 +85,8 @@ const Hero: React.FC = () => {
       }}
     >
       {/* Fixed container - keeps background and overlay fixed while page scrolls */}
-      <div 
-        className="fixed left-0 top-0"
+      <div
+        className="fixed left-0 top-0 z-0"
         style={{
           width: '100vw',
           height: '100vh'

@@ -43,6 +43,12 @@ const Header = () => {
       <header
         className="fixed w-full z-50 transition-all duration-[197ms]"
         style={{
+          top: 0,
+          left: 0,
+          right: 0,
+          transform: 'translateZ(0)',
+          WebkitTransform: 'translate3d(0,0,0)',
+          willChange: 'transform',
           background: scrolled ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
           backdropFilter: scrolled ? 'blur(10px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(10px)' : 'none',
