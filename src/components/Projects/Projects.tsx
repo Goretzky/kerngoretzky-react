@@ -21,9 +21,9 @@ import { useReducedMotion } from "../../hooks/useReducedMotion";
 // Core animation values - used by both About and Projects sections
 const ROTATION_ANGLE = 90;     // Initial 3D rotation (degrees) - adjust for more/less dramatic effect
 const SLIDE_DISTANCE = 100;    // Horizontal slide-in distance (pixels)
-const ANIMATION_DURATION = 0.8; // Length of main animation (seconds)
+const ANIMATION_DURATION = 1.8; // Length of main animation (seconds)
 const HOVER_LIFT = -4;         // Vertical hover translation (pixels) - unique to project cards
-const STAGGER_DELAY = 0.06561;     // Time between each card's animation start (seconds)
+const STAGGER_DELAY = 0.1;     // Time between each card's animation start (seconds)
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom easing curve for smooth motion
 
 const projects = [
@@ -86,7 +86,7 @@ const Projects: React.FC = () => {
               // Final state: visible, centered, and flat
               whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
               // Hover animation: lift card up slightly
-              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
+              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
               // Animation timing and easing
               transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
@@ -113,7 +113,7 @@ const Projects: React.FC = () => {
 
               {/* Project Image */}
               {project.image && (
-                <div className="relative z-10 mb-4 rounded-lg overflow-hidden h-48" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
+                <div className="relative z-10 mb-4 rounded-lg overflow-hidden bg-gray-800 h-48">
                   <picture>
                     <source
                       type="image/webp"
@@ -133,7 +133,7 @@ const Projects: React.FC = () => {
                       `}
                       sizes="(max-width: 768px) 480px, (max-width: 1024px) 768px, 1024px"
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </picture>
@@ -171,7 +171,7 @@ const Projects: React.FC = () => {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-[197ms]"
+                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
                   style={{
                     background: 'rgba(255, 255, 255, 0.1)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -192,7 +192,7 @@ const Projects: React.FC = () => {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-[197ms]"
+                  className="flex-1 text-center px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
                   style={{
                     background: 'rgba(255, 255, 255, 0.1)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',

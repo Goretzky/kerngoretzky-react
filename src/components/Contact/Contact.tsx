@@ -30,7 +30,7 @@ interface FormData {
 // Animation Parameters - matches About and Projects sections
 const ROTATION_ANGLE = 90;
 const SLIDE_DISTANCE = 100;
-const ANIMATION_DURATION = 0.8;
+const ANIMATION_DURATION = 1.8;
 const EASE = [0.11, 0, 0.5, 0] as const;
 
 const Contact: React.FC = () => {
@@ -100,7 +100,7 @@ const Contact: React.FC = () => {
           className="max-w-xl mx-auto text-center"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.32805, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-md">
             Thank You!
@@ -169,7 +169,7 @@ const Contact: React.FC = () => {
               onChange={handleChange}
               placeholder="Your Name"
               className={
-                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-[131ms] " +
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
                 (errors.name ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
               aria-invalid={!!errors.name}
@@ -193,7 +193,7 @@ const Contact: React.FC = () => {
               onChange={handleChange}
               placeholder="your.email@example.com"
               className={
-                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-[131ms] " +
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
                 (errors.email ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
               aria-invalid={!!errors.email}
@@ -216,7 +216,7 @@ const Contact: React.FC = () => {
               onChange={handleChange}
               placeholder="Your message here..."
               className={
-                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-[131ms] " +
+                "p-3 rounded-lg bg-gray-600 border border-gray-500 text-gray-100 focus:outline-none focus:ring-2 transition-all duration-200 " +
                 (errors.message ? "ring-2 ring-red-400 focus:ring-red-400" : "focus:ring-[#32C4C4]")
               }
               rows={5}
