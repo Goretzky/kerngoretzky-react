@@ -113,7 +113,7 @@ const Projects: React.FC = () => {
 
               {/* Project Image */}
               {project.image && (
-                <div className="relative z-10 mb-4 rounded-lg overflow-hidden bg-gray-800 h-48">
+                <div className="relative z-10 mb-4 rounded-lg overflow-hidden h-48" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}>
                   <picture>
                     <source
                       type="image/webp"
@@ -133,7 +133,7 @@ const Projects: React.FC = () => {
                       `}
                       sizes="(max-width: 768px) 480px, (max-width: 1024px) 768px, 1024px"
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       loading="lazy"
                     />
                   </picture>
