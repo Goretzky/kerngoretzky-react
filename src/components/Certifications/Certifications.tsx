@@ -265,7 +265,7 @@ const Certifications: React.FC = () => {
         borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
       }}
     >
-      <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
+      <div className="max-w-6xl mx-auto">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div

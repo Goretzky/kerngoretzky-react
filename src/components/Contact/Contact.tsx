@@ -30,7 +30,7 @@ interface FormData {
 // Animation Parameters - matches About and Projects sections
 const ROTATION_ANGLE = 90;
 const SLIDE_DISTANCE = 100;
-const ANIMATION_DURATION = 1.8;
+const ANIMATION_DURATION = 0.6;
 const EASE = [0.11, 0, 0.5, 0] as const;
 
 const Contact: React.FC = () => {
@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
       id="contact"
       className="contact py-20 px-4 text-gray-100"
     >
-      <div className="max-w-2xl mx-auto" style={{ perspective: "2000px" }}>
+      <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
           initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}

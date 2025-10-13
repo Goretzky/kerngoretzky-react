@@ -20,7 +20,7 @@ import { useReducedMotion } from "../../hooks/useReducedMotion";
 // Matches Projects section exactly for visual consistency
 const ROTATION_ANGLE = 90;      // Initial rotation in degrees (90° rotation around Y axis)
 const SLIDE_DISTANCE = 100;     // Distance of horizontal slide-in motion (pixels)
-const ANIMATION_DURATION = 0.8;  // Total animation time in seconds (matches Projects)
+const ANIMATION_DURATION = 0.6;  // Total animation time in seconds (matches Projects)
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motion
 
 const About: React.FC = () => {
@@ -39,7 +39,7 @@ const About: React.FC = () => {
         borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
       }}
     >
-      <div className="max-w-6xl mx-auto" style={{ perspective: "2000px" }}>
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
