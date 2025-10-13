@@ -1,5 +1,278 @@
 # Todo List
 
+## Current Tasks
+
+### Mobile Navbar Scrolling Fix - Fallback Plan
+
+**Problem**: Fixed navbar doesn't stay in position during scroll on mobile Safari/Chrome (works in desktop emulators but breaks on real devices)
+
+**Root Cause**: CSS properties like `perspective`, `transform`, and `overflow` create containing blocks that break `position: fixed` behavior on mobile browsers.
+
+---
+
+#### ✅ Fix #1: Remove `perspective` from Section Containers (CURRENT - DEPLOYED)
+
+**Status**: Implemented and ready for testing
+
+**What was changed**:
+- Removed `style={{ perspective: "2000px" }}` from:
+  - `src/components/About/About.tsx:42`
+  - `src/components/Projects/Projects.tsx:61`
+  - `src/components/Certifications/Certifications.tsx:268`
+  - `src/components/Contact/Contact.tsx:121`
+
+**Why this should work**:
+- `perspective` creates a containing block (like `transform` does)
+- Individual animated elements still have `transformStyle: "preserve-3d"` so 3D rotations remain intact
+- Removes parent-level CSS property that breaks fixed positioning
+
+**How to test**:
+1. Deploy to production
+2. Test on actual iOS Safari device (iPhone)
+3. Test on actual Chrome for iOS
+4. Test on Android Chrome
+5. Scroll through entire page and verify navbar stays fixed at top
+6. Verify all 3D rotation animations still work on About, Projects, Certifications, Contact sections
+
+**If this works**: Problem solved! No further action needed.
+
+**If this doesn't work**: Proceed to Fix #2 below.
+
+---
+
+#### ⏭️ Fix #2: Remove GPU Acceleration from Navbar (FALLBACK)
+
+**When to try**: If Fix #1 doesn't work after production testing
+
+**What to change** in `src/components/Header/Header.tsx:44-51`:
+
+Remove these lines:
+```typescript
+transform: 'translateZ(0)',
+WebkitTransform: 'translate3d(0,0,0)',
+willChange: 'transform',
+```
+
+**Why this might work**:
+- The `transform` properties on navbar itself create a containing block
+- These were added in commit 9b18edd to fix navbar scrolling via GPU acceleration
+- Removing them might fix the issue but could cause slight performance degradation
+- Trade-off: Less GPU optimization but potentially working fixed position
+
+**Files to modify**:
+- `src/components/Header/Header.tsx`
+
+**Testing checklist**:
+- [ ] Navbar stays fixed on iOS Safari
+- [ ] Navbar stays fixed on Chrome iOS
+- [ ] Navbar stays fixed on Android Chrome
+- [ ] No visual jank or flickering during scroll
+- [ ] Header transitions (blur background on scroll) still work smoothly
+
+---
+
+#### ⏭️ Fix #3: Add `isolation: isolate` to Sections (FALLBACK)
+
+**When to try**: If Fix #1 and #2 don't work
+
+**What to change**:
+
+Add `isolation: "isolate"` to each section container in:
+- `src/components/About/About.tsx:30-40` (section style prop)
+- `src/components/Projects/Projects.tsx:60` (section element)
+- `src/components/Certifications/Certifications.tsx:255-266` (section style prop)
+- `src/components/Contact/Contact.tsx:117-120` (section element)
+
+**Example**:
+```typescript
+<section
+  id="about"
+  className="about py-16 px-4"
+  style={{
+    position: 'relative',
+    isolation: 'isolate',  // ADD THIS
+    background: 'rgba(255, 255, 255, 0.03)',
+    // ... rest of styles
+  }}
+>
+```
+
+**Why this might work**:
+- `isolation: isolate` creates a new stacking context without creating a containing block
+- May prevent the 3D transform effects from interfering with navbar's fixed positioning
+- Less likely to work than Fix #1 or #2, but worth trying
+
+**Files to modify**:
+- `src/components/About/About.tsx`
+- `src/components/Projects/Projects.tsx`
+- `src/components/Certifications/Certifications.tsx`
+- `src/components/Contact/Contact.tsx`
+
+**Testing checklist**:
+- [ ] Navbar stays fixed on all mobile browsers
+- [ ] 3D animations still work correctly
+- [ ] No z-index conflicts or layering issues
+
+---
+
+#### ⏭️ Fix #4: JavaScript-Based Sticky Navbar (FALLBACK)
+
+**When to try**: If all CSS-based fixes fail
+
+**What to implement**:
+
+Replace CSS `position: fixed` with JavaScript scroll detection:
+
+```typescript
+// In Header.tsx
+const [isStuck, setIsStuck] = useState(false);
+
+useEffect(() => {
+  let ticking = false;
+
+  const handleScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        setIsStuck(scrollTop > 0);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
+// Then use position: absolute and transform instead of position: fixed
+```
+
+**Why this might work**:
+- Avoids CSS `position: fixed` entirely
+- Uses `transform: translateY()` which is more reliable on mobile
+- requestAnimationFrame ensures smooth performance
+- Passive scroll listener prevents blocking
+
+**Files to modify**:
+- `src/components/Header/Header.tsx` (major refactor)
+
+**Complexity**: High - requires significant code changes
+
+**Testing checklist**:
+- [ ] Smooth scrolling performance
+- [ ] No visual jank or lag
+- [ ] Works across all mobile browsers
+- [ ] Works during fast scroll/fling gestures
+
+---
+
+#### ⏭️ Fix #5: Simplify Animations - Remove 3D Transforms (LAST RESORT)
+
+**When to try**: Only if all other fixes fail and navbar is critical
+
+**What to change**:
+
+Replace 3D rotation animations with simple 2D animations:
+
+Change from:
+```typescript
+initial={{ opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
+whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+```
+
+To:
+```typescript
+initial={{ opacity: 0, x: SLIDE_DISTANCE }}
+whileInView={{ opacity: 1, x: 0 }}
+```
+
+Remove:
+- `transformStyle: "preserve-3d"` from all motion.div elements
+- All `rotateY` properties
+
+**Why this might work**:
+- Completely eliminates 3D transforms that can interfere with fixed positioning
+- Simplest and most reliable approach
+- Animations will be less visually impressive but more compatible
+
+**Trade-off**: Loses the cool 3D rotation effect but ensures navbar works
+
+**Files to modify**:
+- `src/components/About/About.tsx`
+- `src/components/Projects/Projects.tsx`
+- `src/components/Certifications/Certifications.tsx`
+- `src/components/Contact/Contact.tsx`
+
+**Testing checklist**:
+- [ ] Navbar definitely stays fixed
+- [ ] Animations still look good (even if simpler)
+- [ ] Site feels professional and polished
+
+---
+
+## Testing Protocol for Each Fix
+
+After implementing each fix:
+
+1. **Local Development Test**:
+   - Run `pnpm dev`
+   - Test in browser DevTools mobile emulator
+   - Verify animations work
+   - Verify navbar looks correct
+
+2. **Build and Preview**:
+   - Run `pnpm build`
+   - Run `pnpm preview`
+   - Test again in emulator
+
+3. **Deploy to Production**:
+   - Commit changes
+   - Push to deployment
+   - Wait for deployment to complete
+
+4. **Real Device Testing** (CRITICAL):
+   - Test on iPhone Safari (iOS 15+)
+   - Test on iPhone Chrome
+   - Test on Android Chrome
+   - Test in both portrait and landscape
+   - Test with fast scrolling/flinging
+   - Verify navbar STAYS at top during all scroll actions
+   - Verify sections (especially Projects and Contact) remain visible
+
+5. **Animation Verification**:
+   - Scroll to each section
+   - Verify About section animates correctly
+   - Verify Projects cards animate correctly
+   - Verify Certifications cards animate correctly
+   - Verify Contact form animates correctly
+
+---
+
+## Known Issues History
+
+### Previous Fixes That Caused Problems:
+
+1. **Commit 9b18edd**: Added GPU acceleration (`transform: translateZ(0)`) to navbar
+   - Fixed navbar on some devices
+   - But broke Projects/Contact sections visibility
+
+2. **Commit ede7809**: Changed viewport margin from `-100px` to `0px`
+   - Fixed Projects/Contact sections appearing
+   - But navbar still broken in some cases
+
+3. **Commit 9b5d73d**: Moved `overflow-x-hidden` from App.tsx to body
+   - Partially fixed navbar
+   - But underlying `perspective` issue remained
+
+### Current State (Before Fix #1):
+- Navbar has: `position: fixed` + GPU acceleration transforms
+- Sections have: `perspective: "2000px"` creating containing blocks
+- Viewport margin: `"0px"` (not `-100px`)
+- Problem: Navbar doesn't stay fixed on mobile Safari/Chrome
+
+---
+
 ## Completed Tasks
 
 - [x] Remove conflicting CSS styles from src/index.css
@@ -10,12 +283,54 @@
 - [x] Fix 'Get in Touch' button - make background white like 'View Projects'
 - [x] Fix 'View Projects' link navigation
 - [x] Remove section background colors to show Hero image behind
+- [x] Standardize animation durations to 0.6s across all sections
+- [x] Remove `perspective: "2000px"` from all section containers (Fix #1)
 
 ---
 
 ## Review
 
-### Summary of Changes
+### Summary of Recent Changes (Animation Speed & Navbar Fix)
+
+#### Animation Speed Consistency
+**Files Modified:**
+- `src/components/About/About.tsx:23`
+- `src/components/Projects/Projects.tsx:24`
+- `src/components/Contact/Contact.tsx:33`
+
+**Changes Made:**
+- Standardized `ANIMATION_DURATION` to `0.6` seconds across all sections
+- Previously: About (0.8s), Projects (1.8s), Contact (1.8s), Courses (0.6s)
+- Now: All sections animate at 0.6s for consistent feel
+
+#### Mobile Navbar Fix (Attempt #1)
+**Files Modified:**
+- `src/components/About/About.tsx:42`
+- `src/components/Projects/Projects.tsx:61`
+- `src/components/Certifications/Certifications.tsx:268`
+- `src/components/Contact/Contact.tsx:121`
+
+**Changes Made:**
+- Removed `style={{ perspective: "2000px" }}` from all section container divs
+- Kept `transformStyle: "preserve-3d"` on individual animated elements
+- This eliminates the containing block that breaks `position: fixed` on mobile
+
+**Why This Fix:**
+Research and git history showed that `perspective` CSS property creates a containing block (similar to `transform`), which breaks `position: fixed` behavior on mobile Safari and Chrome. The combination of:
+- Navbar with `transform: translateZ(0)` (GPU acceleration)
+- Sections with `perspective: "2000px"`
+- 3D rotation transforms on animated elements
+
+...created a layering/rendering issue where the navbar wouldn't stay fixed during scroll on real mobile devices (though it worked in desktop emulators).
+
+**Expected Result:**
+- Navbar should stay fixed at top during scroll on mobile Safari/Chrome
+- 3D rotation animations should still work (using `transformStyle: "preserve-3d"` on individual elements)
+- Projects and Contact sections should remain visible (viewport margin is already at "0px")
+
+**Status**: Awaiting production deployment and real device testing.
+
+### Previous Session Summary
 
 This session focused on improving the Contact form styling and fixing several visual and navigation issues across the portfolio.
 
@@ -102,14 +417,17 @@ This session focused on improving the Contact form styling and fixing several vi
 
 - **Tailwind v4 Breaking Changes**: The project uses Tailwind CSS v4.1.13, which has a completely different configuration system than v3. The PostCSS plugin is now in a separate package (`@tailwindcss/postcss`).
 
-- **Animation Consistency**: Contact form now matches the animation style of About and Projects sections (90� rotation, 1.8s duration, custom easing curve).
+- **Animation Consistency**: Contact form now matches the animation style of About and Projects sections (90° rotation, 0.6s duration, custom easing curve).
 
 - **Form Width Constraints**: The max-w-md class on name/email inputs was being overridden by global CSS. Removing the global styles fixed the issue.
+
+- **Mobile Navbar Fix**: CSS `perspective` property creates containing blocks that break `position: fixed` on mobile browsers. This is similar to how `transform` and `overflow` properties can break fixed positioning.
 
 ### Visual Result
 
 - Contact form now has professional card-style presentation matching the portfolio aesthetic
 - All sections show the Hero image background with increasing opacity overlay as user scrolls
 - Consistent white button styling across Hero and Contact sections
-- Smooth animations and transitions throughout
+- Smooth animations and transitions throughout (now consistently 0.6s)
 - All navigation links working correctly
+- Navbar should stay fixed on mobile devices (pending production testing)
