@@ -32,6 +32,7 @@ const About: React.FC = () => {
       className="about py-16 px-4"
       style={{
         position: 'relative',
+        isolation: 'isolate',
         background: 'rgba(255, 255, 255, 0.03)',
         backdropFilter: 'blur(5px)',
         WebkitBackdropFilter: 'blur(5px)',

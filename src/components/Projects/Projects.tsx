@@ -57,7 +57,7 @@ const Projects: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="projects" className="projects py-16 px-4 text-gray-100">
+    <section id="projects" className="projects py-16 px-4 text-gray-100" style={{ isolation: 'isolate' }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div

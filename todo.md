@@ -40,48 +40,90 @@
 
 ---
 
-#### ⏭️ Fix #2: Remove GPU Acceleration from Navbar (FALLBACK)
+#### ✅ Fix #2: Remove GPU Acceleration from Navbar (COMPLETED)
 
-**When to try**: If Fix #1 doesn't work after production testing
+**Status**: Implemented in commit 0946f48, tested in production - DID NOT WORK
 
-**What to change** in `src/components/Header/Header.tsx:44-51`:
+**What was changed** in `src/components/Header/Header.tsx:44-51`:
 
-Remove these lines:
+Removed these lines:
 ```typescript
 transform: 'translateZ(0)',
 WebkitTransform: 'translate3d(0,0,0)',
 willChange: 'transform',
 ```
 
-**Why this might work**:
-- The `transform` properties on navbar itself create a containing block
-- These were added in commit 9b18edd to fix navbar scrolling via GPU acceleration
-- Removing them might fix the issue but could cause slight performance degradation
-- Trade-off: Less GPU optimization but potentially working fixed position
-
-**Files to modify**:
-- `src/components/Header/Header.tsx`
-
-**Testing checklist**:
-- [ ] Navbar stays fixed on iOS Safari
-- [ ] Navbar stays fixed on Chrome iOS
-- [ ] Navbar stays fixed on Android Chrome
-- [ ] No visual jank or flickering during scroll
-- [ ] Header transitions (blur background on scroll) still work smoothly
+**Result**: Navbar still doesn't stay fixed on mobile devices after deployment.
 
 ---
 
-#### ⏭️ Fix #3: Add `isolation: isolate` to Sections (FALLBACK)
+#### ⏭️ Fix #2.5: Disable/Modify 3D Animations on Mobile (NEW - BASED ON TIMING CLUE)
 
-**When to try**: If Fix #1 and #2 don't work
+**When to try**: If Fix #3 doesn't work
 
-**What to change**:
+**Key observation**: User reported that "after the website has been loaded for a while in the mobile browser, the problem goes away." This strongly suggests the issue is related to **animation timing** rather than pure CSS layout.
 
-Add `isolation: "isolate"` to each section container in:
-- `src/components/About/About.tsx:30-40` (section style prop)
+**Theory**: The 3D rotation animations are interfering with the navbar's fixed positioning while they're active/running. Once animations complete and settle, the browser properly establishes the navbar's fixed position.
+
+**Possible solutions**:
+
+**Option A - Add `once: true` to animations** (simplest):
+In all sections (About, Projects, Certifications, Contact), change:
+```typescript
+whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+viewport={{ margin: "0px" }}
+```
+To:
+```typescript
+whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+viewport={{ margin: "0px", once: true }}
+```
+
+This ensures animations only run once and don't re-trigger on scroll, potentially reducing interference with fixed positioning.
+
+**Option B - Disable 3D transforms on mobile only**:
+Add viewport detection and conditionally remove `rotateY` on mobile:
+```typescript
+const isMobile = window.innerWidth < 768;
+const animationVariants = {
+  initial: { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) },
+  animate: { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }
+};
+```
+
+**Option C - Add animation delay on mobile**:
+Delay animations on mobile to let navbar establish fixed position first:
+```typescript
+const isMobile = window.innerWidth < 768;
+const delay = isMobile ? 0.3 : 0;
+// Apply to each animation's transition.delay
+```
+
+**Files to modify**:
+- `src/components/About/About.tsx`
+- `src/components/Projects/Projects.tsx`
+- `src/components/Certifications/Certifications.tsx`
+- `src/components/Contact/Contact.tsx`
+
+**Testing checklist**:
+- [ ] Navbar stays fixed immediately on page load (mobile)
+- [ ] Navbar stays fixed during initial scroll (mobile)
+- [ ] Animations still look good
+- [ ] Performance is smooth
+
+---
+
+#### ✅ Fix #3: Add `isolation: isolate` to Sections (DEPLOYED)
+
+**Status**: Implemented and deployed, awaiting CDN propagation and real device testing
+
+**What was changed**:
+
+Added `isolation: "isolate"` to each section container in:
+- `src/components/About/About.tsx:35` (section style prop)
 - `src/components/Projects/Projects.tsx:60` (section element)
-- `src/components/Certifications/Certifications.tsx:255-266` (section style prop)
-- `src/components/Contact/Contact.tsx:117-120` (section element)
+- `src/components/Certifications/Certifications.tsx:261` (section style prop)
+- `src/components/Contact/Contact.tsx:120` (section element)
 
 **Example**:
 ```typescript
@@ -100,18 +142,19 @@ Add `isolation: "isolate"` to each section container in:
 **Why this might work**:
 - `isolation: isolate` creates a new stacking context without creating a containing block
 - May prevent the 3D transform effects from interfering with navbar's fixed positioning
-- Less likely to work than Fix #1 or #2, but worth trying
 
-**Files to modify**:
-- `src/components/About/About.tsx`
-- `src/components/Projects/Projects.tsx`
-- `src/components/Certifications/Certifications.tsx`
-- `src/components/Contact/Contact.tsx`
+**How to test**:
+1. Wait for CDN propagation
+2. Test on actual iOS Safari device (iPhone)
+3. Test on actual Chrome for iOS
+4. Test on Android Chrome
+5. Scroll through entire page and verify navbar stays fixed at top
+6. Verify all 3D rotation animations still work correctly
+7. Check for any z-index conflicts or layering issues
 
-**Testing checklist**:
-- [ ] Navbar stays fixed on all mobile browsers
-- [ ] 3D animations still work correctly
-- [ ] No z-index conflicts or layering issues
+**If this works**: Problem solved! No further action needed.
+
+**If this doesn't work**: Proceed to Fix #2.5 below (animation timing fix - most promising based on user observation).
 
 ---
 
