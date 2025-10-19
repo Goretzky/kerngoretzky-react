@@ -15,7 +15,7 @@
  * - Submit button: Fixed width with max-w-[200px]
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "@formspree/react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
@@ -38,6 +38,14 @@ const Contact: React.FC = () => {
   // Initialize Formspree hook with your form ID
   const [formState, handleSubmit] = useForm("xanpeaqb");
   const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // State for form field values
   const [formData, setFormData] = useState<FormData>({
@@ -122,8 +130,8 @@ const Contact: React.FC = () => {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           style={{ transformStyle: "preserve-3d" }}
@@ -139,8 +147,8 @@ const Contact: React.FC = () => {
 
         {/* Form Card */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{

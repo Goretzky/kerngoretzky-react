@@ -13,7 +13,7 @@
  */
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters
@@ -25,6 +25,14 @@ const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motio
 
 const About: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <section
@@ -43,8 +51,8 @@ const About: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           style={{ transformStyle: "preserve-3d" }}
@@ -57,8 +65,8 @@ const About: React.FC = () => {
 
         {/* Content Card - Expanded with skills and education */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{

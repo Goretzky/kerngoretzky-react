@@ -206,7 +206,7 @@ const categories = ["All", "Frontend", "Backend", "Full Stack", "Mobile", "Tools
 const Certifications: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showAll, setShowAll] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -270,8 +270,8 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
             style={{ transformStyle: "preserve-3d" }}
@@ -284,8 +284,8 @@ const Certifications: React.FC = () => {
 
           {/* Category Filter Buttons */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
             viewport={{ once: true, margin: "0px" }}
             style={{ transformStyle: "preserve-3d" }}
@@ -319,8 +319,8 @@ const Certifications: React.FC = () => {
           {displayedCertifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, rotateY: ROTATION_ANGLE }}
-              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, rotateY: 0 }}
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
               whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
               transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,

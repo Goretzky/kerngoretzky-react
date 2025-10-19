@@ -111,6 +111,47 @@ const delay = isMobile ? 0.3 : 0;
 - [ ] Animations still look good
 - [ ] Performance is smooth
 
+**⚠️ IMPORTANT RESEARCH FINDING - CSS Media Query Alternative**:
+
+After implementing Option B (disable 3D transforms on mobile with JavaScript), research was conducted to determine if using CSS media queries instead of JavaScript would have avoided the navbar scrolling problem.
+
+**Conclusion: CSS media queries would NOT solve the problem.**
+
+**Why both approaches have the same issue**:
+- The root cause is NOT the detection method (JavaScript vs CSS media queries)
+- The root cause IS the 3D transforms themselves creating a "containing block"
+- Per CSS specification: Any element with `transform`, `perspective`, or `filter` properties creates a containing block
+- Fixed-position elements inside a containing block are positioned relative to that block, NOT the viewport
+- This breaks `position: fixed` behavior regardless of how transforms are applied
+
+**CSS Media Query Approach Would Still Fail**:
+If we used CSS like:
+```css
+@media (min-width: 768px) {
+  .animated-element {
+    transform: rotateY(90deg);
+  }
+}
+```
+The navbar would STILL scroll on desktop devices because desktop users would still have 3D transforms creating containing blocks.
+
+**Why Our JavaScript Solution Works**:
+- Mobile (< 768px): No `rotateY` property at all → No containing block → Fixed navbar works ✓
+- Desktop (≥ 768px): Has `rotateY` property → May still have issues (acceptable for now, prioritizing mobile)
+- The key is **removing the transform property entirely** on mobile, not just changing detection method
+
+**Research Sources**:
+- Stack Overflow: "Position fixed doesn't work when using -webkit-transform"
+- CSS-Tricks forums: Multiple threads on fixed positioning breaking with transforms
+- CSS Specification: Transforms create both a stacking context and a containing block
+
+**Alternative Universal Solutions** (if desktop also needs fixing):
+1. Move navbar outside all transformed containers (structural HTML change)
+2. Use JavaScript-based positioning instead of CSS `position: fixed` (Fix #4 in TODO)
+3. Remove ALL 3D transforms entirely from the site (Fix #5 in TODO - last resort)
+
+**Status**: JavaScript detection with conditional 3D transform removal is the correct approach for this issue.
+
 ---
 
 #### ✅ Fix #3: Add `isolation: isolate` to Sections (DEPLOYED)
