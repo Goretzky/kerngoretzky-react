@@ -372,6 +372,95 @@ After implementing each fix:
 
 ---
 
+## Future Improvements
+
+### Automate AWS S3 + CloudFront Deployment with GitHub Actions
+
+**Status**: For future consideration (currently deploying manually)
+
+**Goal**: Automatically build and deploy to AWS S3 + CloudFront whenever code is pushed to the main branch.
+
+**Benefits**:
+- No manual uploads to S3
+- Automatic cache invalidation
+- Consistent build process
+- Faster deployment workflow
+- Zero cost for invalidations (within free tier)
+
+**How It Works**:
+1. Push code to main branch
+2. GitHub Actions automatically:
+   - Checks out code
+   - Installs dependencies with `pnpm`
+   - Builds production files with `pnpm build`
+   - Syncs `dist/` folder to S3 bucket
+   - Invalidates CloudFront cache with `/*` wildcard
+
+**CloudFront Cache Invalidation Costs**:
+- **Free Tier**: First 1,000 invalidation paths per month are FREE
+- **After Free Tier**: $0.005 per path (half a cent)
+- **Wildcard Tip**: Using `/*` invalidates entire distribution but counts as just 1 path
+- **Estimated Cost**: $0/month (deploying ~30 times/month = well within free tier)
+- **Monthly Reset**: Free tier resets every month
+
+**Requirements to Implement**:
+
+1. **AWS IAM User** (security best practice):
+   - Create dedicated IAM user with minimal permissions
+   - Only needs S3 write access to specific bucket
+   - Only needs CloudFront invalidation permission
+   - Generate access key ID and secret access key
+
+2. **GitHub Repository Secrets** (to add in GitHub settings):
+   - `AWS_ACCESS_KEY_ID`
+   - `AWS_SECRET_ACCESS_KEY`
+   - `AWS_S3_BUCKET` (your bucket name)
+   - `AWS_REGION` (e.g., us-east-1)
+   - `CLOUDFRONT_DISTRIBUTION_ID` (your CloudFront distribution ID)
+
+3. **GitHub Actions Workflow File**:
+   - Create `.github/workflows/deploy.yml`
+   - Configure workflow to:
+     - Trigger on push to main
+     - Use pnpm for dependency management
+     - Build with Vite
+     - Deploy to S3 with AWS CLI
+     - Invalidate CloudFront cache
+
+**Example Workflow Structure**:
+```yaml
+name: Deploy to AWS S3 + CloudFront
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - Checkout code
+      - Setup Node.js and pnpm
+      - Install dependencies
+      - Build production files
+      - Configure AWS credentials
+      - Sync to S3
+      - Invalidate CloudFront cache
+```
+
+**Security Notes**:
+- Never commit AWS credentials to repository
+- Use GitHub secrets for all sensitive information
+- Create IAM user with minimal required permissions only
+- Follow principle of least privilege
+
+**Resources**:
+- AWS CloudFront Pricing: https://aws.amazon.com/cloudfront/pricing/
+- GitHub Actions AWS Deployment: Multiple tutorials available
+- AWS CLI S3 Sync: Built-in to AWS CLI
+
+---
+
 ## Review
 
 ### Summary of Recent Changes (Animation Speed & Navbar Fix)
