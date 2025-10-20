@@ -1,9 +1,9 @@
 // Certifications.tsx
 /**
- * Certifications section with filterable grid and 3D animations.
+ * Certifications section with filterable grid and 2D animations.
  * Features:
  * - Category filtering (All, Frontend, Backend, Full Stack, etc.)
- * - Cards slide in from the right with 3D rotation
+ * - Cards slide in from the right with fade
  * - Staggered animation timing between cards
  * - Hover effect lifts cards slightly
  * - Glassmorphism design matching Projects section
@@ -14,7 +14,6 @@ import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters (matching Projects section)
-const ROTATION_ANGLE = 90;
 const SLIDE_DISTANCE = 100;
 const ANIMATION_DURATION = 0.6;
 const HOVER_LIFT = -4;
@@ -210,7 +209,7 @@ const Certifications: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Detect mobile viewport
+  // Detect mobile viewport (for display limit only)
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -270,11 +269,10 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
-            style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
@@ -284,11 +282,10 @@ const Certifications: React.FC = () => {
 
           {/* Category Filter Buttons */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
             viewport={{ once: true, margin: "0px" }}
-            style={{ transformStyle: "preserve-3d" }}
             className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
           >
             {categories.map((category) => (
@@ -319,8 +316,8 @@ const Certifications: React.FC = () => {
           {displayedCertifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
               whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
               transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
@@ -329,7 +326,6 @@ const Certifications: React.FC = () => {
               }}
               viewport={{ once: true, margin: "0px" }}
               style={{
-                transformStyle: "preserve-3d",
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',

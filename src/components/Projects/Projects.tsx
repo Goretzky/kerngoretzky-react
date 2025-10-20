@@ -1,25 +1,23 @@
 // Projects.tsx
 /**
- * Projects section with responsive grid and 3D animations.
+ * Projects section with responsive grid and 2D animations.
  * Features a combination of entrance and interaction effects:
  * - Header and cards slide in from the right
- * - 3D rotation during entrance (90-degree rotation)
+ * - Smooth fade-in during entrance
  * - Staggered animation timing between cards
  * - Hover effect lifts cards slightly
- * 
+ *
  * Grid Layout:
  * - Responsive columns (1 to 3 depending on viewport)
  * - Consistent card sizing and spacing
  * - Each card maintains its own animation scope
  */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters
-// Core animation values - used by both About and Projects sections
-const ROTATION_ANGLE = 90;     // Initial 3D rotation (degrees) - adjust for more/less dramatic effect
 const SLIDE_DISTANCE = 100;    // Horizontal slide-in distance (pixels)
 const ANIMATION_DURATION = 0.6; // Length of main animation (seconds)
 const HOVER_LIFT = -4;         // Vertical hover translation (pixels) - unique to project cards
@@ -55,27 +53,16 @@ const projects = [
 
 const Projects: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   return (
-    <section id="projects" className="projects py-16 px-4 text-gray-100" style={{ isolation: 'isolate' }}>
+    <section id="projects" className="projects py-16 px-4 text-gray-100">
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
-            style={{
-              transformStyle: "preserve-3d"
-            }}
             className="col-span-full mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
@@ -86,10 +73,10 @@ const Projects: React.FC = () => {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              // Initial state: invisible, shifted right, and rotated
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-              // Final state: visible, centered, and flat
-              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+              // Initial state: invisible, shifted right
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              // Final state: visible, centered
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
               // Hover animation: lift card up slightly
               whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
               // Animation timing and easing
@@ -100,9 +87,7 @@ const Projects: React.FC = () => {
               }}
               // Viewport settings: trigger when in view, only animate once
               viewport={{ once: true, margin: "0px" }}
-              // Enable 3D transforms
               style={{
-                transformStyle: "preserve-3d",
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',

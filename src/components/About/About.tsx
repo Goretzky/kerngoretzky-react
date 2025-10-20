@@ -1,38 +1,27 @@
 /**
- * About section component with 3D slide-in animations.
+ * About section component with 2D slide-in animations.
  * Uses Framer Motion to create engaging entrance animations:
  * - Header and content card slide in from the right
- * - Elements rotate in 3D space while entering
  * - Smooth fade-in effect combines with motion
- * 
- * Animations match the Projects section exactly:
- * - 90-degree initial rotation
- * - 1.8s duration for smooth motion
+ *
+ * Animations match the Projects section for consistency:
+ * - Horizontal slide with opacity fade
+ * - 0.6s duration for smooth motion
  * - Custom easing curve for natural movement
  * - Contained within a max-width card layout
  */
 
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Animation Parameters
-// Matches Projects section exactly for visual consistency
-const ROTATION_ANGLE = 90;      // Initial rotation in degrees (90° rotation around Y axis)
 const SLIDE_DISTANCE = 100;     // Distance of horizontal slide-in motion (pixels)
-const ANIMATION_DURATION = 0.6;  // Total animation time in seconds (matches Projects)
+const ANIMATION_DURATION = 0.6;  // Total animation time in seconds
 const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motion
 
 const About: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   return (
     <section
@@ -40,7 +29,6 @@ const About: React.FC = () => {
       className="about py-16 px-4"
       style={{
         position: 'relative',
-        isolation: 'isolate',
         background: 'rgba(255, 255, 255, 0.03)',
         backdropFilter: 'blur(5px)',
         WebkitBackdropFilter: 'blur(5px)',
@@ -51,11 +39,10 @@ const About: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
-          style={{ transformStyle: "preserve-3d" }}
           className="mb-12 px-4"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
@@ -65,12 +52,11 @@ const About: React.FC = () => {
 
         {/* Content Card - Expanded with skills and education */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{
-            transformStyle: "preserve-3d",
             background: 'rgba(255, 255, 255, 0.1)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',

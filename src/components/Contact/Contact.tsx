@@ -7,7 +7,7 @@
  * - Loading states during submission
  * - Success message after successful submission
  * - Responsive layout with controlled input widths
- * 
+ *
  * Layout customization:
  * - Name and email inputs: Use max-w-{size} classes below to adjust width
  *   Available sizes: max-w-xs (320px), max-w-sm (384px), max-w-md (448px), max-w-lg (512px)
@@ -15,7 +15,7 @@
  * - Submit button: Fixed width with max-w-[200px]
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "@formspree/react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
@@ -27,8 +27,7 @@ interface FormData {
   message: string;
 }
 
-// Animation Parameters - matches About and Projects sections
-const ROTATION_ANGLE = 90;
+// Animation Parameters
 const SLIDE_DISTANCE = 100;
 const ANIMATION_DURATION = 0.6;
 const EASE = [0.11, 0, 0.5, 0] as const;
@@ -38,14 +37,6 @@ const Contact: React.FC = () => {
   // Initialize Formspree hook with your form ID
   const [formState, handleSubmit] = useForm("xanpeaqb");
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // State for form field values
   const [formData, setFormData] = useState<FormData>({
@@ -130,11 +121,10 @@ const Contact: React.FC = () => {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
-          style={{ transformStyle: "preserve-3d" }}
           className="text-center mb-12 px-4"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-md text-center">
@@ -147,12 +137,11 @@ const Contact: React.FC = () => {
 
         {/* Form Card */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE, ...(isMobile ? {} : { rotateY: ROTATION_ANGLE }) }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, ...(isMobile ? {} : { rotateY: 0 }) }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{
-            transformStyle: "preserve-3d",
             background: 'rgba(255, 255, 255, 0.1)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
             boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
