@@ -302,6 +302,59 @@ whileInView={{ opacity: 1, x: 0 }}
 
 ---
 
+## Alternative Root Causes (If Fix #5 Fails on Real Devices)
+
+**Status**: All transform-related fixes have been exhausted. If the navbar still scrolls on real mobile devices after Fix #5 deployment, the problem is likely NOT related to 3D transforms or containing blocks.
+
+**Potential alternative causes to investigate:**
+
+1. **Glassmorphism Effects (`backdrop-filter`)**
+   - The navbar uses `backdrop-filter: blur(10px)` and `WebkitBackdropFilter`
+   - Some mobile browsers may have bugs with `backdrop-filter` on fixed elements
+   - **Test**: Temporarily remove all `backdrop-filter` properties from Header.tsx
+   - **Alternative**: Use solid background color instead of blur effect
+
+2. **Z-Index Stacking Context Issues**
+   - Navbar has `z-index: 50`
+   - Multiple sections use `position: relative` and other stacking context creators
+   - **Test**: Increase navbar z-index to `z-index: 9999`
+   - **Investigate**: Check if any parent elements create new stacking contexts
+
+3. **Mobile Browser Viewport/Scrolling Quirks**
+   - iOS Safari has unique scrolling behaviors (momentum scrolling, rubber-band effect)
+   - Chrome on iOS uses WebKit under the hood (same rendering engine as Safari)
+   - **Test**: Add `overflow-x: hidden` and `-webkit-overflow-scrolling: touch` to body
+   - **Investigate**: Check if page has horizontal overflow causing layout shifts
+
+4. **CSS Will-Change Property**
+   - Removed in Fix #2, but may need to be strategically re-added
+   - **Test**: Add `will-change: contents` to navbar (different from `will-change: transform`)
+
+5. **Hosting/CDN Configuration**
+   - CloudFront caching may serve stale CSS/JS
+   - Browser caching may not update properly
+   - **Test**: Perform full cache invalidation on CloudFront
+   - **Verify**: Check that deployed files match local build output
+
+6. **JavaScript Hydration/Timing Issues**
+   - React hydration may cause layout shifts on initial load
+   - Scroll event listeners may interfere with fixed positioning
+   - **Test**: Check browser console for React hydration warnings
+   - **Investigate**: Profile scroll performance with Chrome DevTools
+
+**Next debugging steps if Fix #5 fails:**
+
+1. Test on real device with browser DevTools remote debugging connected
+2. Record screen capture of the scrolling issue
+3. Use browser DevTools Performance tab to identify layout thrashing
+4. Check for console errors or warnings specific to mobile browsers
+5. Create minimal reproduction (single HTML file with just navbar + scroll content)
+6. Search for browser-specific bugs related to `position: fixed` on the specific device/browser combination
+
+**Note**: We tried Fix #4 (JavaScript-based positioning with `position: absolute` + `transform: translateY()`) during this session and it caused worse behavior (navbar jumping on both desktop and mobile emulators), so that approach is not viable.
+
+---
+
 ## Testing Protocol for Each Fix
 
 After implementing each fix:
