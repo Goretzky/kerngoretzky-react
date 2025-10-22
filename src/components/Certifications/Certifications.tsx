@@ -271,8 +271,8 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div
-            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-8"
@@ -284,8 +284,8 @@ const Certifications: React.FC = () => {
 
           {/* Category Filter Buttons */}
           <motion.div
-            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
@@ -318,8 +318,8 @@ const Certifications: React.FC = () => {
           {displayedCertifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-              whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+              initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               whileHover={disableAnimations ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
               transition={disableAnimations ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,

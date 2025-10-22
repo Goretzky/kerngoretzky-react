@@ -14,7 +14,6 @@ export const useLowPowerDevice = (): boolean => {
     // Check if browser supports hardwareConcurrency
     if (typeof window === 'undefined' || !navigator.hardwareConcurrency) {
       // If API not supported, assume not low-power (desktop browsers)
-      console.log('[useLowPowerDevice] API not supported, animations enabled');
       setIsLowPower(false);
       return;
     }
@@ -22,9 +21,7 @@ export const useLowPowerDevice = (): boolean => {
     // Devices with 4 or fewer CPU cores are considered low-power
     // This catches Raspberry Pi 400 (4 cores), older phones, budget devices
     const cpuCores = navigator.hardwareConcurrency;
-    const shouldDisable = cpuCores <= 4;
-    console.log(`[useLowPowerDevice] Detected ${cpuCores} cores, animations ${shouldDisable ? 'DISABLED' : 'ENABLED'}`);
-    setIsLowPower(shouldDisable);
+    setIsLowPower(cpuCores <= 4);
   }, []);
 
   return isLowPower;
