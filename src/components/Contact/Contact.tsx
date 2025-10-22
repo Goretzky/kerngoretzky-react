@@ -19,6 +19,7 @@ import React, { useState } from "react";
 import { useForm } from "@formspree/react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useLowPowerDevice } from "../../hooks/useLowPowerDevice";
 
 // TypeScript interface for form field types
 interface FormData {
@@ -37,6 +38,8 @@ const Contact: React.FC = () => {
   // Initialize Formspree hook with your form ID
   const [formState, handleSubmit] = useForm("xanpeaqb");
   const prefersReducedMotion = useReducedMotion();
+  const isLowPowerDevice = useLowPowerDevice();
+  const disableAnimations = prefersReducedMotion || isLowPowerDevice;
 
   // State for form field values
   const [formData, setFormData] = useState<FormData>({
@@ -120,9 +123,9 @@ const Contact: React.FC = () => {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
+          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           className="text-center mb-12 px-4"
         >
@@ -136,9 +139,9 @@ const Contact: React.FC = () => {
 
         {/* Form Card */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
+          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{
             background: 'rgba(255, 255, 255, 0.1)',
@@ -228,8 +231,8 @@ const Contact: React.FC = () => {
           <motion.button
             type="submit"
             disabled={formState.submitting}
-            whileHover={!formState.submitting && !prefersReducedMotion ? { scale: 1.05 } : {}}
-            whileTap={!formState.submitting && !prefersReducedMotion ? { scale: 0.98 } : {}}
+            whileHover={!formState.submitting && !disableAnimations ? { scale: 1.05 } : {}}
+            whileTap={!formState.submitting && !disableAnimations ? { scale: 0.98 } : {}}
             className={
               "glass-button relative overflow-hidden text-white font-semibold py-3 px-8 rounded-full w-full max-w-[200px] " +
               (formState.submitting ? "opacity-75 cursor-not-allowed" : "")

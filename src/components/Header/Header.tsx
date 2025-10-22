@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useLowPowerDevice } from "../../hooks/useLowPowerDevice";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const isLowPowerDevice = useLowPowerDevice();
+  const disableAnimations = prefersReducedMotion || isLowPowerDevice;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +24,10 @@ const Header = () => {
       const headerOffset = 80; // Height of fixed header + some spacing
       const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
 
-      // Respect reduced motion preference
+      // Respect reduced motion preference and low-power devices
       window.scrollTo({
         top: targetPosition,
-        behavior: prefersReducedMotion ? "auto" : "smooth"
+        behavior: disableAnimations ? "auto" : "smooth"
       });
     }
   };

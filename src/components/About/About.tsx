@@ -14,6 +14,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useLowPowerDevice } from "../../hooks/useLowPowerDevice";
 
 // Animation Parameters
 const SLIDE_DISTANCE = 100;     // Distance of horizontal slide-in motion (pixels)
@@ -22,6 +23,8 @@ const EASE = [0.11, 0, 0.5, 0] as const; // Custom bezier curve for smooth motio
 
 const About: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const isLowPowerDevice = useLowPowerDevice();
+  const disableAnimations = prefersReducedMotion || isLowPowerDevice;
 
   return (
     <section
@@ -39,9 +42,9 @@ const About: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
+          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           className="mb-12 px-4"
         >
@@ -52,9 +55,9 @@ const About: React.FC = () => {
 
         {/* Content Card - Expanded with skills and education */}
         <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
+          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{
             background: 'rgba(255, 255, 255, 0.1)',

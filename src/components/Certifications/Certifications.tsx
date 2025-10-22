@@ -12,6 +12,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useLowPowerDevice } from "../../hooks/useLowPowerDevice";
 
 // Animation Parameters (matching Projects section)
 const SLIDE_DISTANCE = 100;
@@ -207,6 +208,8 @@ const Certifications: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const prefersReducedMotion = useReducedMotion();
+  const isLowPowerDevice = useLowPowerDevice();
+  const disableAnimations = prefersReducedMotion || isLowPowerDevice;
   const sectionRef = useRef<HTMLElement>(null);
 
   // Detect mobile viewport (for display limit only)
@@ -239,7 +242,7 @@ const Certifications: React.FC = () => {
 
       window.scrollTo({
         top: targetPosition,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        behavior: disableAnimations ? 'auto' : 'smooth'
       });
 
       // Then collapse after delay to allow scroll to complete (longer delay for mobile)
@@ -268,9 +271,9 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Header */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
+            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-8"
           >
@@ -281,9 +284,9 @@ const Certifications: React.FC = () => {
 
           {/* Category Filter Buttons */}
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
+            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.2 }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-8 flex flex-wrap justify-center gap-3"
           >
@@ -315,10 +318,10 @@ const Certifications: React.FC = () => {
           {displayedCertifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
-              transition={prefersReducedMotion ? { duration: 0 } : {
+              initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+              whileHover={disableAnimations ? {} : { y: HOVER_LIFT, transition: { duration: 0.13122 } }}
+              transition={disableAnimations ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
                 ease: EASE,
                 delay: index * STAGGER_DELAY

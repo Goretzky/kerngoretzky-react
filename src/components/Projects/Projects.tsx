@@ -16,6 +16,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useLowPowerDevice } from "../../hooks/useLowPowerDevice";
 
 // Animation Parameters
 const SLIDE_DISTANCE = 100;    // Horizontal slide-in distance (pixels)
@@ -53,15 +54,17 @@ const projects = [
 
 const Projects: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const isLowPowerDevice = useLowPowerDevice();
+  const disableAnimations = prefersReducedMotion || isLowPowerDevice;
 
   return (
     <section id="projects" className="projects py-16 px-4 text-gray-100">
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
+            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-12"
           >
@@ -74,13 +77,13 @@ const Projects: React.FC = () => {
             <motion.div
               key={index}
               // Initial state: invisible, shifted right
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
               // Final state: visible, centered
-              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+              whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
               // Hover animation: lift card up slightly
-              whileHover={prefersReducedMotion ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
+              whileHover={disableAnimations ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
               // Animation timing and easing
-              transition={prefersReducedMotion ? { duration: 0 } : {
+              transition={disableAnimations ? { duration: 0 } : {
                 duration: ANIMATION_DURATION,
                 ease: [0.11, 0, 0.5, 0], // Custom easing curve for smooth animation
                 delay: index * STAGGER_DELAY // Creates cascading effect
