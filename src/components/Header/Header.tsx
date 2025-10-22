@@ -46,9 +46,7 @@ const Header = () => {
           top: 0,
           left: 0,
           right: 0,
-          background: scrolled ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(10px)' : 'none',
+          background: scrolled ? 'rgba(0, 0, 0, 0.85)' : 'transparent',
           borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
           boxShadow: scrolled ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none'
         }}
