@@ -62,8 +62,8 @@ const Projects: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           <motion.div
-            initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-            whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+            whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
             transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
             viewport={{ once: true, margin: "0px" }}
             className="col-span-full mb-12"
@@ -77,9 +77,9 @@ const Projects: React.FC = () => {
             <motion.div
               key={index}
               // Initial state: invisible, shifted right
-              initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
+              initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
               // Final state: visible, centered
-              whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+              whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
               // Hover animation: lift card up slightly
               whileHover={disableAnimations ? {} : { y: HOVER_LIFT, transition: { duration: 0.2 } }}
               // Animation timing and easing

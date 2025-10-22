@@ -123,8 +123,8 @@ const Contact: React.FC = () => {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
           transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           className="text-center mb-12 px-4"
@@ -139,8 +139,8 @@ const Contact: React.FC = () => {
 
         {/* Form Card */}
         <motion.div
-          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
           transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{

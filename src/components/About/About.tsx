@@ -42,8 +42,8 @@ const About: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
           transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE }}
           viewport={{ once: true, margin: "0px" }}
           className="mb-12 px-4"
@@ -55,8 +55,8 @@ const About: React.FC = () => {
 
         {/* Content Card - Expanded with skills and education */}
         <motion.div
-          initial={disableAnimations ? { opacity: 1 } : { opacity: 0, x: SLIDE_DISTANCE }}
-          whileInView={disableAnimations ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          initial={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 0, x: SLIDE_DISTANCE }}
+          whileInView={disableAnimations ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
           transition={disableAnimations ? { duration: 0 } : { duration: ANIMATION_DURATION, ease: EASE, delay: 0.1 }}
           viewport={{ once: true, margin: "0px" }}
           style={{
