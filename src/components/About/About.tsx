@@ -111,7 +111,7 @@ const About: React.FC = () => {
                 <div>
                   <h4 className="text-sm font-medium text-[#32C4C4] mb-2">Backend & Cloud</h4>
                   <div className="flex flex-wrap gap-2">
-                    {["Node.js", "Express", "MongoDB", "AWS", "Vercel", "Git/GitHub"].map((skill, index) => (
+                    {["Node.js", "Express", "MongoDB", "AWS", "Vercel", "Git/GitHub", "CI/CD", "GitHub Actions"].map((skill, index) => (
                       <span
                         key={index}
                         className="px-3 py-1 text-xs font-medium rounded-full"

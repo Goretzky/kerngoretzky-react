@@ -41,7 +41,7 @@ const Header = () => {
       </a>
 
       <header
-        className="sticky w-full z-50 transition-all duration-[197ms]"
+        className="sticky lg:fixed w-full z-50 transition-all duration-[197ms]"
         style={{
           top: 0,
           left: 0,
