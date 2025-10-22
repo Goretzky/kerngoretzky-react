@@ -41,13 +41,14 @@ const Header = () => {
       </a>
 
       <header
-        className="fixed w-full z-[9999] transition-all duration-[197ms]"
+        className="sticky w-full z-50 transition-all duration-[197ms]"
         style={{
           top: 0,
           left: 0,
           right: 0,
-          position: 'fixed',
-          background: scrolled ? 'rgba(0, 0, 0, 0.85)' : 'transparent',
+          background: scrolled ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(10px)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
           boxShadow: scrolled ? '0 4px 16px rgba(0, 0, 0, 0.1)' : 'none'
         }}
