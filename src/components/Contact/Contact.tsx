@@ -116,7 +116,6 @@ const Contact: React.FC = () => {
     <section
       id="contact"
       className="contact py-20 px-4 text-gray-100"
-      style={{ isolation: 'isolate' }}
     >
       <div className="max-w-2xl mx-auto">
         {/* Header */}
